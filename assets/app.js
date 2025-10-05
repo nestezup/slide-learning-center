@@ -16,6 +16,7 @@ function toggleChat() {
 function openChat() {
     const modal = document.getElementById('chatModal');
     const card = document.getElementById('chatCard');
+    const toggle = document.getElementById('chatToggle');
 
     if (!modal || !card) return;
 
@@ -23,6 +24,11 @@ function openChat() {
 
     card.classList.remove('slide-in', 'slide-out');
     card.classList.remove('translate-y-full');
+
+    // Update toggle state
+    if (toggle) {
+        toggle.checked = true;
+    }
 
     updateApiStatus();
 
@@ -34,11 +40,17 @@ function openChat() {
 function closeChat() {
     const modal = document.getElementById('chatModal');
     const card = document.getElementById('chatCard');
+    const toggle = document.getElementById('chatToggle');
 
     if (!modal || !card) return;
 
     card.classList.remove('slide-in');
     card.classList.add('slide-out');
+
+    // Update toggle state
+    if (toggle) {
+        toggle.checked = false;
+    }
 
     setTimeout(() => {
         modal.classList.add('hidden');
@@ -47,9 +59,69 @@ function closeChat() {
     }, 300);
 }
 
+// Handle chat toggle from sidebar
+function handleChatToggle(checkbox) {
+    if (checkbox.checked) {
+        openChat();
+    } else {
+        closeChat();
+    }
+}
+
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
 const totalSlides = slides.length;
+
+// Inject navigation below slides
+function injectSlideNavigation() {
+    if (totalSlides === 0) return;
+
+    // Check if navigation already exists
+    if (document.getElementById('slideNavigation')) return;
+
+    // Find the main content wrapper
+    const mainWrapper = document.querySelector('.container.mx-auto.px-4.py-8');
+    if (!mainWrapper) return;
+
+    // Create navigation container
+    const navContainer = document.createElement('div');
+    navContainer.id = 'slideNavigation';
+    navContainer.className = 'mt-8';
+    navContainer.innerHTML = `
+        <div class="lg:grid lg:grid-cols-[260px_1fr] gap-8">
+            <div class="hidden lg:block"></div>
+            <div class="flex justify-between items-center py-6 max-w-5xl">
+                <button id="prevSlideBtn" class="btn btn-outline gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    이전
+                </button>
+                <div class="text-center">
+                    <span class="text-sm text-base-content/60"><span id="currentSlideNumber">1</span> / ${totalSlides}</span>
+                </div>
+                <button id="nextSlideBtn" class="btn btn-primary gap-2">
+                    다음
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    `;
+
+    // Insert after main wrapper
+    mainWrapper.appendChild(navContainer);
+
+    // Add click handlers
+    document.getElementById('prevSlideBtn').addEventListener('click', () => changeSlide(-1));
+    document.getElementById('nextSlideBtn').addEventListener('click', () => changeSlide(1));
+}
+
+// Initialize navigation on page load
+if (slides.length > 0) {
+    injectSlideNavigation();
+}
 
 function showSlide(index, { updateHash = true } = {}) {
     if (index < 0 || index >= totalSlides) return;
@@ -67,7 +139,10 @@ function showSlide(index, { updateHash = true } = {}) {
 
     // Update progress bar
     const progress = ((index + 1) / totalSlides) * 100;
-    document.getElementById('progressBar').style.width = progress + '%';
+    const progressBar = document.getElementById('progressBar');
+    if (progressBar) {
+        progressBar.style.width = progress + '%';
+    }
 
     // Update sidebar menu
     for (let i = 0; i < totalSlides; i++) {
@@ -81,10 +156,45 @@ function showSlide(index, { updateHash = true } = {}) {
         }
     }
 
+    // Update pagination
+    updatePagination(index);
+
     if (updateHash) {
         const newHash = `#slide-${index + 1}`;
         if (window.location.hash !== newHash) {
             history.replaceState(null, '', newHash);
+        }
+    }
+}
+
+function updatePagination(index) {
+    // Update slide number
+    const slideNumber = document.getElementById('currentSlideNumber');
+    if (slideNumber) {
+        slideNumber.textContent = index + 1;
+    }
+
+    // Update button states
+    const prevBtn = document.getElementById('prevSlideBtn');
+    const nextBtn = document.getElementById('nextSlideBtn');
+
+    if (prevBtn) {
+        if (index === 0) {
+            prevBtn.disabled = true;
+            prevBtn.classList.add('btn-disabled');
+        } else {
+            prevBtn.disabled = false;
+            prevBtn.classList.remove('btn-disabled');
+        }
+    }
+
+    if (nextBtn) {
+        if (index === totalSlides - 1) {
+            nextBtn.disabled = true;
+            nextBtn.classList.add('btn-disabled');
+        } else {
+            nextBtn.disabled = false;
+            nextBtn.classList.remove('btn-disabled');
         }
     }
 }

@@ -6,7 +6,7 @@
     <title>CLI로 웹 정보 수집하기 - 스크래핑 중심</title>
     <script src="../assets/setup.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.24/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/marked@12.0.1/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.9/dist/purify.min.js"></script>
     <link rel="stylesheet" href="../assets/styles.css">
@@ -41,15 +41,10 @@
     <!-- Presentation Body -->
     <div class="container mx-auto px-4 py-8 lg:py-12">
         <!-- Header -->
-        <header class="text-center mb-6">
+        <header class="text-center mb-6 pt-12 lg:pt-0">
             <h1 class="text-5xl lg:text-6xl font-bold mb-3">CLI로 웹 정보 수집하기 🌐</h1>
             <p class="text-2xl text-base-content/80">스크래핑으로 데이터를 수집하고, 명령어로 세상에 배포하기</p>
         </header>
-
-        <!-- Progress Bar -->
-        <div class="w-full bg-base-100 rounded-full h-2.5 mb-8">
-            <div id="progressBar" class="bg-primary h-2.5 rounded-full transition-all duration-300" style="width: 10%"></div>
-        </div>
 
         <div class="lg:hidden mb-6">
             <label class="form-control w-full">
@@ -90,6 +85,10 @@
 
             <!-- Slides Container -->
             <main class="max-w-5xl mx-auto lg:mx-0">
+                <!-- Progress Bar -->
+                <div class="w-full bg-base-100 rounded-full h-2.5 mb-8">
+                    <div id="progressBar" class="bg-primary h-2.5 rounded-full transition-all duration-300" style="width: 10%"></div>
+                </div>
                 <!-- Slide 1: 주제 개요 -->
                 <section id="slide-1" class="slide active animate-fade-in">
                     <div class="card bg-base-100 shadow-xl">
@@ -420,22 +419,6 @@ gh repo edit --enable-pages</code></pre>
                     </div>
                 </section>
             </main>
-        </div>
-
-        <!-- Navigation -->
-        <div class="flex justify-between items-center mt-12">
-            <button id="prevBtn" class="btn btn-outline" onclick="changeSlide(-1)">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
-                이전
-            </button>
-            <button id="nextBtn" class="btn btn-primary" onclick="changeSlide(1)">
-                다음
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-            </button>
         </div>
     </div>
 

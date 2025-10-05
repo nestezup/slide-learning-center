@@ -6,7 +6,7 @@
     <title>학습 센터 - 강의 대시보드</title>
     <script src="assets/setup.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.24/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body class="theme-transition min-h-screen">
@@ -27,120 +27,157 @@
     </div>
 
     <!-- Main Content -->
-    <div class="container mx-auto px-4 py-12 max-w-7xl">
+    <div class="container mx-auto px-4 py-12 max-w-6xl">
         <!-- Header -->
-        <header class="text-center mb-16">
-            <h1 class="text-6xl lg:text-7xl font-bold mb-4">학습 센터</h1>
-            <p class="text-2xl text-base-content/80">실전 AI · 개발 강의 모음</p>
+        <header class="text-center mb-12">
+            <h1 class="text-5xl lg:text-6xl font-bold mb-4">학습 센터</h1>
+            <p class="text-xl text-base-content/80">실전 AI · 개발 강의 모음</p>
         </header>
 
-        <!-- Course Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Filter & Search Section -->
+        <div class="mb-8 space-y-4">
+            <!-- Search Bar -->
+            <div class="form-control">
+                <div class="input-group">
+                    <input type="text" id="searchInput" placeholder="강의 검색..." class="input input-bordered flex-1" onkeyup="filterCourses()">
+                    <button class="btn btn-square">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Category Filters -->
+            <div class="flex flex-wrap gap-2">
+                <button class="btn btn-sm btn-primary" data-category="all" onclick="filterByCategory('all')">전체</button>
+                <button class="btn btn-sm btn-outline btn-primary" data-category="cli" onclick="filterByCategory('cli')">CLI</button>
+                <button class="btn btn-sm btn-outline btn-secondary" data-category="ai" onclick="filterByCategory('ai')">AI 협업</button>
+                <button class="btn btn-sm btn-outline btn-accent" data-category="data" onclick="filterByCategory('data')">데이터</button>
+                <button class="btn btn-sm btn-outline btn-info" data-category="web" onclick="filterByCategory('web')">웹 개발</button>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats shadow w-full">
+                <div class="stat">
+                    <div class="stat-title">전체 강의</div>
+                    <div class="stat-value text-primary" id="totalCourses">3</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-title">표시 중</div>
+                    <div class="stat-value text-secondary" id="visibleCourses">3</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-title">총 학습 시간</div>
+                    <div class="stat-value text-accent">60분</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course List -->
+        <div class="space-y-4" id="courseList">
             <!-- CLI 맛보기 Course -->
-            <a href="slides/cli.html" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                <div class="card-body">
-                    <div class="badge badge-primary badge-lg mb-4">실전 CLI</div>
-                    <h2 class="card-title text-3xl mb-3">터미널(CLI) 맛보기</h2>
-                    <p class="text-base-content/80 mb-4">
-                        작은 명령어들을 레고처럼 조합해 보는 시간. "왜 터미널이 편한가?"를 3분 안에 체감합니다.
-                    </p>
-                    <div class="space-y-2 mb-4">
-                        <div class="flex items-center gap-2 text-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span>15분 분량</span>
+            <a href="slides/cli.html" class="course-item block no-underline" data-category="cli" data-tags="터미널 CLI 명령어 실습 기초">
+                <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-base-200">
+                    <div class="card-body">
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-3xl">💻</span>
+                                    <h2 class="card-title text-2xl">터미널(CLI) 맛보기</h2>
+                                </div>
+                                <p class="text-base-content/70 mb-4">
+                                    작은 명령어들을 레고처럼 조합해 보는 시간. "왜 터미널이 편한가?"를 3분 안에 체감합니다.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <div class="badge badge-primary">CLI 기초</div>
+                                    <div class="badge badge-outline">실습</div>
+                                    <div class="badge badge-outline">초급</div>
+                                    <div class="badge badge-ghost">15분 · 11슬라이드</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-circle btn-ghost">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
                         </div>
-                        <div class="flex items-center gap-2 text-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span>11개 슬라이드</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
-                            <span>실습 포함</span>
-                        </div>
-                    </div>
-                    <div class="card-actions justify-end">
-                        <button class="btn btn-primary btn-sm">시작하기 →</button>
                     </div>
                 </div>
             </a>
 
             <!-- Claude Code 게임 만들기 Course -->
-            <a href="slides/claude-code.html" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                <div class="card-body">
-                    <div class="badge badge-secondary badge-lg mb-4">AI 협업</div>
-                    <h2 class="card-title text-3xl mb-3">Claude Code로 게임 만들기</h2>
-                    <p class="text-base-content/80 mb-4">
-                        코드 한 줄 없이 상상만으로 게임을 만듭니다. AI에게 설명하면 실제 작동하는 게임이 탄생!
-                    </p>
-                    <div class="space-y-2 mb-4">
-                        <div class="flex items-center gap-2 text-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span>20분 분량</span>
+            <a href="slides/claude-code.html" class="course-item block no-underline" data-category="ai" data-tags="Claude AI 게임 개발 협업">
+                <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-base-200">
+                    <div class="card-body">
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-3xl">🤖</span>
+                                    <h2 class="card-title text-2xl">Claude Code로 게임 만들기</h2>
+                                </div>
+                                <p class="text-base-content/70 mb-4">
+                                    코드 한 줄 없이 상상만으로 게임을 만듭니다. AI에게 설명하면 실제 작동하는 게임이 탄생!
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <div class="badge badge-secondary">AI 협업</div>
+                                    <div class="badge badge-outline">프로젝트</div>
+                                    <div class="badge badge-outline">초급</div>
+                                    <div class="badge badge-ghost">20분 · 10슬라이드</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-circle btn-ghost">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
                         </div>
-                        <div class="flex items-center gap-2 text-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span>10개 슬라이드</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span>게임 6종 제작</span>
-                        </div>
-                    </div>
-                    <div class="card-actions justify-end">
-                        <button class="btn btn-secondary btn-sm">시작하기 →</button>
                     </div>
                 </div>
             </a>
 
             <!-- CLI 웹 스크래핑 Course -->
-            <a href="slides/scraping.html" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                <div class="card-body">
-                    <div class="badge badge-accent badge-lg mb-4">데이터 수집</div>
-                    <h2 class="card-title text-3xl mb-3">CLI로 웹 정보 수집하기</h2>
-                    <p class="text-base-content/80 mb-4">
-                        스크래핑으로 웹 데이터를 수집하고, 명령어로 가공하여 세상에 배포하는 전체 파이프라인을 배웁니다.
-                    </p>
-                    <div class="space-y-2 mb-4">
-                        <div class="flex items-center gap-2 text-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span>25분 분량</span>
+            <a href="slides/scraping.html" class="course-item block no-underline" data-category="data cli" data-tags="스크래핑 데이터 curl jq 웹">
+                <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-base-200">
+                    <div class="card-body">
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="text-3xl">🌐</span>
+                                    <h2 class="card-title text-2xl">CLI로 웹 정보 수집하기</h2>
+                                </div>
+                                <p class="text-base-content/70 mb-4">
+                                    스크래핑으로 웹 데이터를 수집하고, 명령어로 가공하여 세상에 배포하는 전체 파이프라인을 배웁니다.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <div class="badge badge-accent">데이터 수집</div>
+                                    <div class="badge badge-outline">실습</div>
+                                    <div class="badge badge-outline">중급</div>
+                                    <div class="badge badge-ghost">25분 · 10슬라이드</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-circle btn-ghost">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
                         </div>
-                        <div class="flex items-center gap-2 text-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span>10개 슬라이드</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                            </svg>
-                            <span>배포 자동화</span>
-                        </div>
-                    </div>
-                    <div class="card-actions justify-end">
-                        <button class="btn btn-accent btn-sm">시작하기 →</button>
                     </div>
                 </div>
             </a>
         </div>
 
+        <!-- Empty State -->
+        <div id="emptyState" class="hidden text-center py-12">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 mx-auto text-base-content/20 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p class="text-xl text-base-content/60">검색 결과가 없습니다</p>
+            <p class="text-sm text-base-content/40 mt-2">다른 키워드로 검색해보세요</p>
+        </div>
+
         <!-- Footer Info -->
-        <div class="mt-16 text-center">
+        <div class="mt-12 text-center">
             <div class="alert alert-info inline-flex max-w-2xl">
                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -151,7 +188,7 @@
     </div>
 
     <script>
-        // Theme management (simplified version from setup.js)
+        // Theme management
         const themeKey = 'theme';
         const defaultTheme = 'bumblebee';
 
@@ -197,6 +234,70 @@
             if (!container.contains(event.target)) {
                 document.getElementById('themeMenu').classList.add('hidden');
             }
+        });
+
+        // Filter & Search functionality
+        let currentCategory = 'all';
+
+        function filterByCategory(category) {
+            currentCategory = category;
+
+            // Update button states (only filter buttons, not course cards)
+            document.querySelectorAll('button[data-category]').forEach(btn => {
+                if (btn.getAttribute('data-category') === category) {
+                    btn.classList.remove('btn-outline');
+                } else {
+                    btn.classList.add('btn-outline');
+                }
+            });
+
+            filterCourses();
+        }
+
+        function filterCourses() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const courses = document.querySelectorAll('.course-item');
+            let visibleCount = 0;
+
+            courses.forEach(course => {
+                const categories = course.getAttribute('data-category').split(' ');
+                const tags = course.getAttribute('data-tags').toLowerCase();
+                const title = course.querySelector('.card-title').textContent.toLowerCase();
+                const descriptionEl = course.querySelector('.text-base-content\\/70');
+                const description = descriptionEl ? descriptionEl.textContent.toLowerCase() : '';
+
+                const matchesCategory = currentCategory === 'all' || categories.includes(currentCategory);
+                const matchesSearch = searchTerm === '' ||
+                                    title.includes(searchTerm) ||
+                                    description.includes(searchTerm) ||
+                                    tags.includes(searchTerm);
+
+                if (matchesCategory && matchesSearch) {
+                    course.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    course.classList.add('hidden');
+                }
+            });
+
+            // Update stats
+            document.getElementById('visibleCourses').textContent = visibleCount;
+
+            // Show/hide empty state
+            const emptyState = document.getElementById('emptyState');
+            const courseList = document.getElementById('courseList');
+            if (visibleCount === 0) {
+                courseList.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+            } else {
+                courseList.classList.remove('hidden');
+                emptyState.classList.add('hidden');
+            }
+        }
+
+        // Initialize filter on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            filterCourses();
         });
     </script>
 </body>
