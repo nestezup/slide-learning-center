@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code로 게임 만들기 실전 슬라이드</title>
+    <script src="../assets/setup.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.24/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.1/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.9/dist/purify.min.js"></script>
+    <link rel="stylesheet" href="../assets/styles.css">
+
+</head>
+<body class="theme-transition min-h-screen">
+    <!-- Home Button -->
+    <div class="fixed top-4 left-4 z-50">
+        <a href="../index.html" class="btn btn-ghost shadow">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            <span class="text-sm font-semibold">홈</span>
+        </a>
+    </div>
+
+    <!-- Theme Toggle -->
+    <div class="fixed top-4 right-4 z-50">
+        <div class="relative" id="themeMenuContainer">
+            <button id="themeToggleButton" class="btn btn-primary shadow" type="button" aria-haspopup="true" aria-expanded="false">
+                <span id="currentThemeLabel" class="text-sm font-semibold">🐝 Bumblebee</span>
+            </button>
+            <ul id="themeMenu" class="hidden absolute right-0 mt-2 z-[60] menu p-2 shadow bg-base-100 rounded-box w-52">
+                <li><button type="button" data-theme-option="bumblebee">🐝 Bumblebee</button></li>
+                <li><button type="button" data-theme-option="silk">🎨 Silk</button></li>
+                <li><button type="button" data-theme-option="black">⚫ Black</button></li>
+                <li><button type="button" data-theme-option="dark">🌙 Dark</button></li>
+                <li><button type="button" data-theme-option="light">☀️ Light</button></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Presentation Body -->
+    <div class="container mx-auto px-4 py-8 lg:py-12">
+                <!-- Header -->
+                <header class="text-center mb-6">
+                    <h1 class="text-5xl lg:text-6xl font-bold mb-3">Claude Code로 게임 만들기</h1>
+                    <p class="text-2xl text-base-content/80">상상을 코드로 바꾸는 AI 협업</p>
+                </header>
+
+                <!-- Progress Bar -->
+                <div class="w-full bg-base-100 rounded-full h-2.5 mb-8">
+                    <div id="progressBar" class="bg-primary h-2.5 rounded-full transition-all duration-300" style="width: 10%"></div>
+                </div>
+
+                <div class="lg:hidden mb-6">
+                    <label class="form-control w-full">
+                        <span class="label-text mb-2">슬라이드 선택</span>
+                        <select class="select select-bordered" onchange="goToSlide(this.selectedIndex)">
+                            <option>소개</option>
+                            <option>AI 협업이란?</option>
+                            <option>환경 준비</option>
+                            <option>첫 게임 만들기</option>
+                            <option>2048 게임</option>
+                            <option>슈팅 게임</option>
+                            <option>카드 짝맞추기</option>
+                            <option>타이핑 게임</option>
+                            <option>프롬프트 팁</option>
+                            <option>다음 단계</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="lg:grid lg:grid-cols-[260px_1fr] gap-8">
+                    <aside class="hidden lg:block">
+                        <div class="sticky top-24 space-y-4">
+                            <h3 class="text-lg font-semibold">콘텐츠 목차</h3>
+                            <ul class="menu menu-compact bg-base-100 rounded-box shadow-lg border border-base-200">
+                                <li><a href="#slide-1" id="sidebar-slide-0" class="flex items-center gap-3"><span class="badge badge-outline">01</span>소개</a></li>
+                                <li><a href="#slide-2" id="sidebar-slide-1" class="flex items-center gap-3"><span class="badge badge-outline">02</span>AI 협업이란?</a></li>
+                                <li><a href="#slide-3" id="sidebar-slide-2" class="flex items-center gap-3"><span class="badge badge-outline">03</span>환경 준비</a></li>
+                                <li><a href="#slide-4" id="sidebar-slide-3" class="flex items-center gap-3"><span class="badge badge-outline">04</span>첫 게임 만들기</a></li>
+                                <li><a href="#slide-5" id="sidebar-slide-4" class="flex items-center gap-3"><span class="badge badge-outline">05</span>2048 게임</a></li>
+                                <li><a href="#slide-6" id="sidebar-slide-5" class="flex items-center gap-3"><span class="badge badge-outline">06</span>슈팅 게임</a></li>
+                                <li><a href="#slide-7" id="sidebar-slide-6" class="flex items-center gap-3"><span class="badge badge-outline">07</span>카드 짝맞추기</a></li>
+                                <li><a href="#slide-8" id="sidebar-slide-7" class="flex items-center gap-3"><span class="badge badge-outline">08</span>타이핑 게임</a></li>
+                                <li><a href="#slide-9" id="sidebar-slide-8" class="flex items-center gap-3"><span class="badge badge-outline">09</span>프롬프트 팁</a></li>
+                                <li><a href="#slide-10" id="sidebar-slide-9" class="flex items-center gap-3"><span class="badge badge-outline">10</span>다음 단계</a></li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                    <!-- Slides Container -->
+                    <main class="max-w-5xl mx-auto lg:mx-0">
+            <section id="slide-1" class="slide active animate-fade-in">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body space-y-5">
+                        <div class="badge badge-primary badge-lg">Intro</div>
+                        <h2 class="card-title text-4xl lg:text-5xl">Claude Code로 게임 만들기</h2>
+                        <p class="text-lg text-base-content/80">코드 한 줄 없이 상상만으로 게임을 만드는 시간입니다. AI에게 "이런 게임 만들어줘"라고 말하면, 실제로 작동하는 게임이 탄생합니다.</p>
+                        <div class="bg-base-200 rounded-lg p-5">
+                            <h3 class="text-xl font-semibold mb-3">오늘의 포인트</h3>
+                            <ul class="space-y-2 text-lg">
+                                <li>• AI와 협업하는 새로운 개발 방식</li>
+                                <li>• 프롬프트로 게임 6종 만들어보기</li>
+                                <li>• 내 아이디어를 즉시 실행 가능한 코드로</li>
+                            </ul>
+                        </div>
+                        <div class="alert alert-info text-base">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-5 w-5" fill="none" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>환경: VS Code + Claude Code + Live Server (코딩 경험 불필요!)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="slide-2" class="slide active animate-fade-in">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body space-y-5">
+                        <div class="badge badge-secondary badge-lg">개념</div>
+                        <h2 class="card-title text-4xl lg:text-5xl">AI 협업이란?</h2>
+                        <ul class="space-y-3 text-lg leading-relaxed">
+                            <li>• <span class="font-semibold">기존 방식</span> → 코드를 직접 작성하고, 버그를 고치고, 테스트하는 반복</li>
+                            <li>• <span class="font-semibold">AI 협업</span> → "이런 게임 만들어줘"라고 설명하면 AI가 코드 생성</li>
+                            <li>• <span class="badge badge-outline">핵심</span> 개발자가 아니라 <strong>기획자처럼</strong> 생각하기</li>
+                        </ul>
+                        <div class="bg-base-200 rounded-lg p-5 text-base">
+                            <p class="font-semibold mb-2">Claude Code의 3대 장점</p>
+                            <p><strong>1. 즉시성</strong> — 생각한 아이디어를 3초 만에 실행<br>
+                            <strong>2. 반복</strong> — "이 부분만 바꿔줘"로 무한 수정 가능<br>
+                            <strong>3. 학습</strong> — AI가 만든 코드를 보며 자연스럽게 배움</p>
+                        </div>
+                        <blockquote class="bg-accent/10 border-l-4 border-accent p-4 text-base italic">
+                            "코드를 짜는 게 아니라, 내가 원하는 걸 AI에게 설명하는 새로운 시대입니다."
+                        </blockquote>
+                    </div>
+                </div>
+            </section>
+
+            <section id="slide-3" class="slide active animate-fade-in">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body space-y-5">
+                        <div class="badge badge-accent badge-lg">준비</div>
+                        <h2 class="card-title text-4xl lg:text-5xl">환경 준비하기</h2>
+                        <p class="text-lg">Claude Code는 VS Code에서 실행되며, 파일 생성부터 수정까지 AI가 자동으로 처리합니다.</p>
+                        <div class="space-y-4">
+                            <div class="bg-base-200 rounded-lg p-4">
+                                <h3 class="text-lg font-semibold mb-2">1️⃣ VS Code 설치</h3>
+                                <p class="text-sm">공식 사이트(<code>code.visualstudio.com</code>)에서 다운로드 후 설치</p>
+                            </div>
+                            <div class="bg-base-200 rounded-lg p-4">
+                                <h3 class="text-lg font-semibold mb-2">2️⃣ Claude Code 확장 설치</h3>
+                                <p class="text-sm">VS Code 확장 마켓에서 "Claude Code" 검색 → 설치 → API 키 입력</p>
+                            </div>
+                        </div>
+                        <div class="alert alert-success text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-5 w-5" fill="none" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>이 2가지만 있으면 준비 완료! 프로그래밍 지식은 필요 없습니다.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="slide-4" class="slide active animate-fade-in">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body space-y-5">
+                        <div class="badge badge-secondary badge-lg">실전 1</div>
+                        <h2 class="card-title text-4xl lg:text-5xl">첫 게임 만들기 — 숫자 맞추기</h2>
+                        <p class="text-lg">가장 간단한 게임으로 시작합니다. AI에게 요청만 하면 끝!</p>
+                        <div class="bg-base-200 rounded-lg p-4 space-y-3">
+                            <h3 class="text-lg font-semibold">📝 기본 프롬프트</h3>
+                            <div class="mockup-code">
+                                <pre><code>1~100 사이 숫자를 맞추는 게임을 만들어줘.
+사용자가 입력하면 "높아요/낮아요/정답!" 메시지를 보여주고,
+시도 횟수를 기록해줘.</code></pre>
+                            </div>
+                        </div>
+                        <div class="bg-base-200 rounded-lg p-4 space-y-3">
+                            <h3 class="text-lg font-semibold">✨ 디테일 프롬프트 (선택)</h3>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>게임 시작 시 랜덤 숫자 생성</li>
+                                <li>입력 필드와 "확인" 버튼 추가</li>
+                                <li>정답 맞추면 축하 메시지와 "다시 시작" 버튼</li>
+                                <li>디자인은 심플하고 밝은 톤으로</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm text-base-content/70">💡 Claude Code에 위 프롬프트 입력 → 파일 생성 → Live Server 실행 → 게임 완성!</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="slide-5" class="slide active animate-fade-in">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body space-y-5">
+                        <div class="badge badge-accent badge-lg">실전 2</div>
+                        <h2 class="card-title text-4xl lg:text-5xl">2048 게임 만들기</h2>
+                        <p class="text-lg">슬라이드 퍼즐 게임. 키보드로 블록을 움직여 2048을 만들어보세요!</p>
+                        <div class="bg-base-200 rounded-lg p-4 space-y-3">
+                            <h3 class="text-lg font-semibold">📝 기본 프롬프트</h3>
+                            <div class="mockup-code">
+                                <pre><code>2048 게임을 만들어줘.
+HTML, CSS, JavaScript로 구성하고,
+키보드 방향키로 블록을 이동할 수 있게 해줘.</code></pre>
+                            </div>
+                        </div>
+                        <div class="bg-base-200 rounded-lg p-4 space-y-3">
+                            <h3 class="text-lg font-semibold">✨ 디테일 프롬프트 (선택)</h3>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>4x4 그리드에 랜덤으로 블록 등장</li>
+                                <li>같은 숫자가 만나면 합쳐지고 점수 상승</li>
+                                <li>디자인은 심플한 모던톤</li>
+                                <li>점수판과 "다시 시작하기" 버튼 추가</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm text-base-content/70">💡 블록 이동 로직, 점수 계산, 키보드 입력까지 AI가 모두 처리합니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="slide-6" class="slide active animate-fade-in">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body space-y-5">
+                        <div class="badge badge-secondary badge-lg">실전 3</div>
+                        <h2 class="card-title text-4xl lg:text-5xl">슈팅 게임 만들기</h2>
+                        <p class="text-lg">탄막을 피하며 적을 맞추는 슈팅 게임. 실시간 반응이 필요한 게임도 가능!</p>
+                        <div class="bg-base-200 rounded-lg p-4 space-y-3">
+                            <h3 class="text-lg font-semibold">📝 기본 프롬프트</h3>
+                            <div class="mockup-code">
+                                <pre><code>간단한 슈팅 게임을 만들어줘.
+플레이어는 아래쪽에서 총알을 쏘고,
+위에서 내려오는 적들을 맞추는 구조로 해줘.</code></pre>
+                            </div>
+                        </div>
+                        <div class="bg-base-200 rounded-lg p-4 space-y-3">
+                            <h3 class="text-lg font-semibold">✨ 디테일 프롬프트 (선택)</h3>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>플레이어는 좌우 방향키로 이동</li>
+                                <li>스페이스바로 총알 발사</li>
+                                <li>적은 랜덤한 위치에서 아래로 이동</li>
+                                <li>점수 시스템과 생명 3개 추가</li>
+                                <li>배경에 은은한 우주 이미지</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm text-base-content/70">💡 <code>requestAnimationFrame</code>과 충돌 판정도 AI가 자동으로 구현합니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="slide-7" class="slide active animate-fade-in">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body space-y-5">
+                        <div class="badge badge-accent badge-lg">실전 4</div>
+                        <h2 class="card-title text-4xl lg:text-5xl">카드 짝맞추기 게임</h2>
+                        <p class="text-lg">기억력을 테스트하는 클래식 게임. 같은 그림을 찾아 모두 뒤집으면 승리!</p>
+                        <div class="bg-base-200 rounded-lg p-4 space-y-3">
+                            <h3 class="text-lg font-semibold">📝 기본 프롬프트</h3>
+                            <div class="mockup-code">
+                                <pre><code>같은 그림을 맞추는 카드 짝맞추기 게임을 만들어줘.
+HTML, CSS, JS로 구성하고,
+4x4 카드로 시작하게 해줘.</code></pre>
+                            </div>
+                        </div>
+                        <div class="bg-base-200 rounded-lg p-4 space-y-3">
+                            <h3 class="text-lg font-semibold">✨ 디테일 프롬프트 (선택)</h3>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>클릭 시 카드가 뒤집혀서 이미지 표시</li>
+                                <li>같은 이미지면 유지, 다르면 1초 후 다시 뒤집기</li>
+                                <li>시도 횟수와 남은 카드 수 표시</li>
+                                <li>간단한 애니메이션 효과</li>
+                                <li>완성 시 "축하합니다!" 메시지</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm text-base-content/70">💡 배열, 상태관리, DOM 조작을 AI가 깔끔하게 처리해줍니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="slide-8" class="slide active animate-fade-in">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body space-y-5">
+                        <div class="badge badge-secondary badge-lg">실전 5</div>
+                        <h2 class="card-title text-4xl lg:text-5xl">타이핑 속도 게임</h2>
+                        <p class="text-lg">단어를 빠르게 입력하며 타이핑 실력을 테스트하는 게임입니다.</p>
+                        <div class="bg-base-200 rounded-lg p-4 space-y-3">
+                            <h3 class="text-lg font-semibold">📝 기본 프롬프트</h3>
+                            <div class="mockup-code">
+                                <pre><code>타이핑 속도 게임을 만들어줘.
+단어가 하나씩 나오고,
+사용자가 입력하면 다음 단어가 뜨게 해줘.</code></pre>
+                            </div>
+                        </div>
+                        <div class="bg-base-200 rounded-lg p-4 space-y-3">
+                            <h3 class="text-lg font-semibold">✨ 디테일 프롬프트 (선택)</h3>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>단어는 랜덤 배열에서 하나씩 표시</li>
+                                <li>맞게 입력하면 점수 상승, 타이머 60초</li>
+                                <li>남은 시간 표시, 최고 점수 기록 기능</li>
+                                <li>배경은 어두운 색, 글씨는 밝은 색으로</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm text-base-content/70">💡 문자열 비교, 타이머, 점수 관리 같은 기본 로직을 간단히 구현합니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="slide-9" class="slide active animate-fade-in">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body space-y-5">
+                        <div class="badge badge-primary badge-lg">팁</div>
+                        <h2 class="card-title text-4xl lg:text-5xl">AI와 대화하는 법 — 프롬프트 팁</h2>
+                        <p class="text-lg">Claude Code를 잘 활용하려면 "어떻게 요청하는가"가 중요합니다.</p>
+                        <div class="space-y-4">
+                            <div class="bg-base-200 rounded-lg p-4">
+                                <h3 class="text-lg font-semibold mb-2">1️⃣ 두 단계로 나누기</h3>
+                                <p class="text-sm mb-2"><strong>1단계:</strong> "이런 게임 만들어줘" (큰 틀 생성)</p>
+                                <p class="text-sm"><strong>2단계:</strong> "이 부분만 바꿔줘" (세부 조정)</p>
+                            </div>
+                            <div class="bg-base-200 rounded-lg p-4">
+                                <h3 class="text-lg font-semibold mb-2">2️⃣ 구체적으로 설명하기</h3>
+                                <p class="text-sm text-error">❌ "게임 만들어줘"</p>
+                                <p class="text-sm text-success">✅ "1~100 숫자 맞추기 게임, 시도 횟수 기록, 정답 시 축하 메시지"</p>
+                            </div>
+                            <div class="bg-base-200 rounded-lg p-4">
+                                <h3 class="text-lg font-semibold mb-2">3️⃣ 디자인도 요청 가능</h3>
+                                <p class="text-sm">"심플한 모던톤", "어두운 배경에 밝은 글씨", "애니메이션 효과 추가" 등</p>
+                            </div>
+                        </div>
+                        <blockquote class="bg-accent/10 border-l-4 border-accent p-4 text-base italic">
+                            "AI는 당신의 말을 정확히 듣고 있습니다. 구체적으로 말할수록 원하는 결과가 나옵니다!"
+                        </blockquote>
+                    </div>
+                </div>
+            </section>
+
+            <section id="slide-10" class="slide active animate-fade-in">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body space-y-5">
+                        <div class="badge badge-accent badge-lg">Next</div>
+                        <h2 class="card-title text-4xl lg:text-5xl">다음 단계: 나만의 게임 만들기</h2>
+                        <p class="text-lg">오늘 배운 방식으로 어떤 게임이든 만들 수 있습니다!</p>
+                        <div class="bg-base-200 rounded-lg p-5">
+                            <h3 class="text-xl font-semibold mb-3">🚀 게임 테스트하기 — Live Server</h3>
+                            <p class="text-sm mb-3">게임을 만든 후 바로 실행해서 확인해야겠죠?</p>
+                            <div class="space-y-3">
+                                <div class="bg-base-300 rounded-lg p-3">
+                                    <p class="font-semibold text-sm mb-2">📂 파일 직접 열기 (비추천)</p>
+                                    <p class="text-xs"><code>file:///...</code> 경로로 열림 → CORS 오류, API 호출 불가 ❌</p>
+                                </div>
+                                <div class="bg-base-300 rounded-lg p-3">
+                                    <p class="font-semibold text-sm mb-2">🌐 Live Server 사용 (추천!) ⭐</p>
+                                    <p class="text-xs mb-2">VS Code 확장 "Live Server" 설치 → HTML 파일 우클릭 → "Open with Live Server"</p>
+                                    <p class="text-xs"><code>http://127.0.0.1:5500</code> 로컬 서버로 실행 → 실제 웹처럼 작동 ✅</p>
+                                    <p class="text-xs text-success mt-1">💡 코드 수정하면 브라우저가 자동으로 새로고침!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-base-200 rounded-lg p-5">
+                            <h3 class="text-xl font-semibold mb-3">💡 더 시도해볼 게임들</h3>
+                            <ul class="space-y-2 text-base">
+                                <li>• <strong>장애물 피하기</strong> (Flappy Bird 스타일)</li>
+                                <li>• <strong>클릭 반응속도 테스트</strong></li>
+                                <li>• <strong>퀴즈 게임</strong> (랜덤 문제 출제)</li>
+                                <li>• <strong>벽돌 깨기</strong> (Breakout 클래식)</li>
+                                <li>• <strong>내가 상상한 게임</strong> — 무엇이든 가능합니다!</li>
+                            </ul>
+                        </div>
+                        <blockquote class="bg-primary/10 border-l-4 border-primary p-5 text-lg italic">
+                            "AI가 코드를 대신 짜주는 게 아니라,<br>
+                            <strong>내 상상을 코드로 구현하는 새로운 방식</strong>입니다."
+                        </blockquote>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</div>
+
+    <!-- Slide-out Chat Modal -->
+    <div id="chatModal" class="hidden fixed right-4 bottom-24 z-50">
+        <div class="card w-96 bg-base-100 shadow-2xl transform translate-y-full transition-transform duration-300" id="chatCard">
+                <div class="card-body p-4">
+                <div class="flex justify-between items-center mb-4 gap-3">
+                    <h3 class="text-lg font-bold">🤖 슬라이드 도우미</h3>
+                    <div class="flex items-center gap-2">
+                        <button onclick="openApiKeyModal()" class="btn btn-sm gap-2 h-9">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                            </svg>
+                            <span id="apiKeyStatus">키 미설정</span>
+                        </button>
+                        <button onclick="closeChat()" class="btn btn-sm btn-circle btn-ghost">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="chatMessages" class="h-[32rem] overflow-y-auto mb-4 space-y-2 bg-base-200 rounded-lg p-4">
+                    <div class="chat chat-start">
+                        <div class="chat-bubble">
+                            안녕하세요! 현재 슬라이드에 대해 궁금한 점을 물어보세요.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <div class="input-group">
+                        <input type="text" id="chatInput" placeholder="질문을 입력하세요..." class="input input-bordered flex-1" onkeypress="handleChatKeyPress(event)">
+                        <button class="btn btn-primary" onclick="sendChatMessage()">
+                            보내기
+                        </button>
+                    </div>
+                </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- API Key Modal -->
+    <div id="apiKeyModal" class="hidden fixed inset-0 z-[70] bg-[#0a0d14]/90 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="modal-card w-full max-w-md rounded-2xl shadow-2xl">
+            <div class="p-6 space-y-4">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-lg font-bold">API 키 설정</h3>
+                    <button onclick="closeApiKeyModal()" class="btn btn-sm btn-circle btn-ghost">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <p class="text-sm text-base-content/70">입력한 API 키는 브라우저의 <code>localStorage</code>에만 저장되며 서버로 전송되지 않습니다. 공개 키는 사용하지 마세요.</p>
+
+                <label class="form-control">
+                    <span class="label-text">API Key</span>
+                    <input type="password" id="apiKeyInput" class="input input-bordered" placeholder="sk-..." autocomplete="off">
+                </label>
+
+                <label class="form-control">
+                    <span class="label-text">API Endpoint (선택)</span>
+                    <input type="text" id="apiEndpointInput" class="input input-bordered" placeholder="https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent">
+                </label>
+
+                <label class="form-control">
+                    <span class="label-text">모델 (선택)</span>
+                    <input type="text" id="apiModelInput" class="input input-bordered" placeholder="gemini-2.5-flash">
+                </label>
+
+                <!-- 테스트 버튼 -->
+                <div class="flex gap-2">
+                    <button class="btn btn-outline flex-1" onclick="testApiKey()">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        API 키 테스트
+                    </button>
+                </div>
+
+                <!-- 테스트 결과 표시 -->
+                <div id="apiTestResult" class="hidden"></div>
+
+                <div class="alert alert-warning text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-5 w-5" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 5c-.77-1.333-2.694-1.333-3.464 0L4.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <span>브라우저에서 직접 호출하므로 CORS 또는 요금 문제를 확인하세요.</span>
+                </div>
+
+                <div class="flex justify-end gap-2 pt-2">
+                    <button class="btn btn-ghost" onclick="closeApiKeyModal()">취소</button>
+                    <button class="btn btn-primary" onclick="saveApiSettings()">저장</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Floating Chat Button -->
+    <div class="fixed bottom-4 right-4 z-40">
+        <button class="btn btn-primary btn-circle btn-lg shadow-lg hover:scale-110 transition-transform" onclick="toggleChat()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+        </button>
+    </div>
+    <script src="../assets/app.js"></script>
+</body>
+</html>

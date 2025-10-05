@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLI로 웹 정보 수집하기 - 스크래핑 중심</title>
+    <script src="../assets/setup.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.24/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.1/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.9/dist/purify.min.js"></script>
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="theme-transition min-h-screen">
+    <!-- Home Button -->
+    <div class="fixed top-4 left-4 z-50">
+        <a href="../index.html" class="btn btn-ghost shadow">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            <span class="text-sm font-semibold">홈</span>
+        </a>
+    </div>
+
+    <!-- Theme Toggle -->
+    <div class="fixed top-4 right-4 z-50">
+        <div class="relative" id="themeMenuContainer">
+            <button id="themeToggleButton" class="btn btn-primary shadow" type="button" aria-haspopup="true" aria-expanded="false">
+                <span id="currentThemeLabel" class="text-sm font-semibold">🐝 Bumblebee</span>
+            </button>
+            <ul id="themeMenu" class="hidden absolute right-0 mt-2 z-[60] menu p-2 shadow bg-base-100 rounded-box w-52">
+                <li><button type="button" data-theme-option="bumblebee">🐝 Bumblebee</button></li>
+                <li><button type="button" data-theme-option="silk">🎨 Silk</button></li>
+                <li><button type="button" data-theme-option="black">⚫ Black</button></li>
+                <li><button type="button" data-theme-option="dark">🌙 Dark</button></li>
+                <li><button type="button" data-theme-option="light">☀️ Light</button></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Presentation Body -->
+    <div class="container mx-auto px-4 py-8 lg:py-12">
+        <!-- Header -->
+        <header class="text-center mb-6">
+            <h1 class="text-5xl lg:text-6xl font-bold mb-3">CLI로 웹 정보 수집하기 🌐</h1>
+            <p class="text-2xl text-base-content/80">스크래핑으로 데이터를 수집하고, 명령어로 세상에 배포하기</p>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="w-full bg-base-100 rounded-full h-2.5 mb-8">
+            <div id="progressBar" class="bg-primary h-2.5 rounded-full transition-all duration-300" style="width: 10%"></div>
+        </div>
+
+        <div class="lg:hidden mb-6">
+            <label class="form-control w-full">
+                <span class="label-text mb-2">슬라이드 선택</span>
+                <select class="select select-bordered" onchange="goToSlide(this.selectedIndex)">
+                    <option>주제 개요</option>
+                    <option>학습 목표</option>
+                    <option>기본 명령어</option>
+                    <option>스크래핑 실습 ① - BigKinds</option>
+                    <option>데이터 가공 실습</option>
+                    <option>Claude Code 협업</option>
+                    <option>GitHub Pages 배포 - 기존 방식</option>
+                    <option>GitHub Pages 배포 - GitHub CLI</option>
+                    <option>자동화 확장</option>
+                    <option>핵심 메시지</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="lg:grid lg:grid-cols-[260px_1fr] gap-8">
+            <aside class="hidden lg:block">
+                <div class="sticky top-24 space-y-4">
+                    <h3 class="text-lg font-semibold">콘텐츠 목차</h3>
+                    <ul class="menu menu-compact bg-base-100 rounded-box shadow-lg border border-base-200">
+                        <li><a href="#slide-1" id="sidebar-slide-0" class="flex items-center gap-3"><span class="badge badge-outline">01</span>주제 개요</a></li>
+                        <li><a href="#slide-2" id="sidebar-slide-1" class="flex items-center gap-3"><span class="badge badge-outline">02</span>학습 목표</a></li>
+                        <li><a href="#slide-3" id="sidebar-slide-2" class="flex items-center gap-3"><span class="badge badge-outline">03</span>기본 명령어</a></li>
+                        <li><a href="#slide-4" id="sidebar-slide-3" class="flex items-center gap-3"><span class="badge badge-outline">04</span>BigKinds 실습</a></li>
+                        <li><a href="#slide-5" id="sidebar-slide-4" class="flex items-center gap-3"><span class="badge badge-outline">05</span>데이터 가공</a></li>
+                        <li><a href="#slide-6" id="sidebar-slide-5" class="flex items-center gap-3"><span class="badge badge-outline">06</span>Claude 협업</a></li>
+                        <li><a href="#slide-7" id="sidebar-slide-6" class="flex items-center gap-3"><span class="badge badge-outline">07</span>배포 (기존)</a></li>
+                        <li><a href="#slide-8" id="sidebar-slide-7" class="flex items-center gap-3"><span class="badge badge-outline">08</span>배포 (CLI)</a></li>
+                        <li><a href="#slide-9" id="sidebar-slide-8" class="flex items-center gap-3"><span class="badge badge-outline">09</span>자동화 확장</a></li>
+                        <li><a href="#slide-10" id="sidebar-slide-9" class="flex items-center gap-3"><span class="badge badge-outline">10</span>핵심 메시지</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Slides Container -->
+            <main class="max-w-5xl mx-auto lg:mx-0">
+                <!-- Slide 1: 주제 개요 -->
+                <section id="slide-1" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-primary badge-lg">Intro</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">주제 개요</h2>
+                            <div class="bg-base-200 rounded-lg p-5">
+                                <p class="text-xl italic mb-4">"이제는 AI뿐만 아니라,<br>명령어로 직접 웹 데이터를 가져올 수 있습니다."</p>
+                            </div>
+                            <p class="text-lg text-base-content/80">Claude Code는 AI를 CLI 안으로 가져온 도구였다면, 이번에는 <span class="font-semibold">CLI 자체를 활용해서 웹 데이터를 다루는 방법</span>을 배웁니다.</p>
+                            <div class="alert alert-info text-base">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-5 w-5" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>CLI는 단순히 로컬 파일 조작 도구가 아니라, <strong>웹과 서버를 직접 연결하는 강력한 인터페이스</strong>입니다.</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 2: 학습 목표 -->
+                <section id="slide-2" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-secondary badge-lg">목표</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">학습 목표</h2>
+                            <ul class="space-y-3 text-lg leading-relaxed">
+                                <li>• <code>curl</code> 명령으로 웹 데이터 요청하기</li>
+                                <li>• <code>grep</code>, <code>jq</code>로 필요한 부분만 추출하기</li>
+                                <li>• CLI 파이프(<code>|</code>), 리다이렉션(<code>&gt;</code>, <code>&gt;&gt;</code>)의 실제 활용</li>
+                                <li>• Claude Code와 연동하여 자동 요약하기</li>
+                                <li>• GitHub CLI를 이용해 <strong>스크래핑 결과를 웹에 배포하기</strong></li>
+                            </ul>
+                            <div class="bg-base-200 rounded-lg p-5 text-base">
+                                <p class="font-semibold mb-2">이 강의를 마치면</p>
+                                <p>웹 데이터를 수집하고, 가공하고, 배포하는 전체 파이프라인을 CLI만으로 구축할 수 있게 됩니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 3: 기본 명령어 정리 -->
+                <section id="slide-3" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-accent badge-lg">기본</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">기본 명령어 정리</h2>
+                            <div class="overflow-x-auto">
+                                <table class="table table-zebra">
+                                    <thead>
+                                        <tr>
+                                            <th>명령어</th>
+                                            <th>역할</th>
+                                            <th>예시</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>curl</code></td>
+                                            <td>웹 요청 (HTTP GET/POST)</td>
+                                            <td><code>curl https://example.com</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>grep</code></td>
+                                            <td>텍스트에서 특정 단어 검색</td>
+                                            <td><code>grep "AI" news.json</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>jq</code></td>
+                                            <td>JSON 데이터 파싱/정제</td>
+                                            <td><code>cat news.json | jq '.resultList[].TITLE'</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>|</code> (파이프)</td>
+                                            <td>명령 결과를 다음 명령의 입력으로 전달</td>
+                                            <td><code>cat a.txt | grep "error"</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>&gt;</code> (리다이렉션)</td>
+                                            <td>결과를 새 파일로 저장</td>
+                                            <td><code>echo "data" &gt; log.txt</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>&gt;&gt;</code> (추가 저장)</td>
+                                            <td>기존 파일에 이어쓰기</td>
+                                            <td><code>echo "추가" &gt;&gt; log.txt</code></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 4: 스크래핑 실습 ① - BigKinds -->
+                <section id="slide-4" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-primary badge-lg">실습 1</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">스크래핑 실습 ① — BigKinds 뉴스 데이터 📰</h2>
+                            <div class="alert alert-info text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>💡 BigKinds는 한국언론진흥재단이 운영하는 뉴스 데이터 서비스입니다.</span>
+                            </div>
+
+                            <div class="space-y-5">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-3">(1) 뉴스 검색 요청</h3>
+                                    <div class="mockup-code">
+                                        <pre><code>curl "https://www.bigkinds.or.kr/api/news/search.do?q=AI" > news.json</code></pre>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2">→ news.json 파일이 생성됩니다.</p>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-3">(2) 결과 확인</h3>
+                                    <div class="mockup-code">
+                                        <pre><code>cat news.json | jq '.resultList | length'
+cat news.json | jq '.resultList[].TITLE'</code></pre>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2">첫 번째 명령은 기사 개수를, 두 번째 명령은 기사 제목만 출력합니다.</p>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-3">(3) 결과 저장</h3>
+                                    <div class="mockup-code">
+                                        <pre><code>cat news.json | jq '.resultList[].TITLE' > news_titles.txt
+head news_titles.txt</code></pre>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2">결과를 파일로 저장한 뒤, 일부 내용을 미리 확인합니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 5: CLI 데이터 다루기 실습 -->
+                <section id="slide-5" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-secondary badge-lg">실습 2</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">CLI 데이터 다루기 실습 🧩</h2>
+                            <div class="mockup-code mb-4">
+                                <pre><code># 특정 키워드 필터링
+grep "AI" news.json > filtered.txt
+
+# JSON에서 특정 필드 추출
+cat news.json | jq '.resultList[].CONTENT' > content.txt
+
+# 두 명령을 연결해서 결과만 추출
+cat news.json | jq '.resultList[].TITLE' | grep "경제" > economy_titles.txt</code></pre>
+                            </div>
+                            <div class="bg-base-200 rounded-lg p-5">
+                                <p class="text-lg font-semibold">💡 핵심 포인트</p>
+                                <p class="text-base">"명령어를 연결하면, 데이터 가공 과정이 하나의 '파이프라인'이 된다."</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 6: Claude Code와 결합하기 -->
+                <section id="slide-6" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-accent badge-lg">협업</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">Claude Code와 결합하기 🤝</h2>
+                            <p class="text-lg">Claude Code가 실행 중이라면 이렇게 말할 수 있습니다:</p>
+                            <div class="bg-base-200 rounded-lg p-5">
+                                <p class="text-lg italic">"news_titles.txt 파일의 내용을 요약해서<br>AI 뉴스의 핵심 트렌드를 summary.txt에 정리해줘."</p>
+                            </div>
+                            <p class="text-base text-base-content/80">CLI로 데이터를 모으고, Claude로 분석 및 요약을 맡기는 협업 구조입니다.</p>
+                            <div class="alert alert-success">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-5 w-5" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>데이터 수집(CLI) + 분석(AI) = 강력한 자동화 워크플로우</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 7: GitHub Pages 배포 - 기존 방식 -->
+                <section id="slide-7" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-warning badge-lg">배포 1</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">결과를 GitHub Pages에 배포하기 🚀</h2>
+                            <h3 class="text-2xl font-semibold">(1) 기존 방식 (복잡한 설정)</h3>
+                            <ol class="list-decimal pl-6 space-y-2 text-base">
+                                <li>GitHub 접속 → 새 리포지토리 생성</li>
+                                <li>로컬에서 다음 명령 수행:</li>
+                            </ol>
+                            <div class="mockup-code mb-3">
+                                <pre><code>git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/USERNAME/demo.git
+git push -u origin main</code></pre>
+                            </div>
+                            <ol start="3" class="list-decimal pl-6 space-y-2 text-base">
+                                <li>GitHub → Settings → Pages → main 브랜치 선택</li>
+                            </ol>
+                            <div class="alert alert-warning text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 5c-.77-1.333-2.694-1.333-3.464 0L4.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                                <span>단계가 많고, 초보자에겐 헷갈립니다.</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 8: GitHub Pages 배포 - GitHub CLI -->
+                <section id="slide-8" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-success badge-lg">배포 2</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">(2) GitHub CLI (gh)로 간단하게</h2>
+                            <p class="text-lg">CLI로 모든 과정을 한 번에 처리할 수 있습니다.</p>
+                            <div class="mockup-code mb-4">
+                                <pre><code># 리포지토리 생성
+gh repo create scraping-demo --public --source=.
+
+# 커밋 및 푸시
+git add .
+git commit -m "add scraped news data"
+git push origin main
+
+# GitHub Pages 활성화
+gh repo edit --enable-pages</code></pre>
+                            </div>
+                            <div class="bg-base-200 rounded-lg p-5">
+                                <p class="text-lg font-semibold">💡 포인트</p>
+                                <p class="text-base">"이제 브라우저를 열지 않아도, CLI 한 줄로 배포가 가능합니다."</p>
+                            </div>
+                            <h3 class="text-xl font-semibold">(3) 사이트 열기</h3>
+                            <div class="mockup-code">
+                                <pre><code>open "https://USERNAME.github.io/scraping-demo"</code></pre>
+                            </div>
+                            <p class="text-sm text-base-content/70">스크래핑한 데이터를 웹페이지로 바로 확인할 수 있습니다.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 9: 확장 예시 - Claude Code 자동화 -->
+                <section id="slide-9" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-primary badge-lg">자동화</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">확장 예시 — Claude Code 자동화</h2>
+                            <p class="text-lg">Claude Code와 gh CLI를 함께 사용할 수도 있습니다:</p>
+                            <div class="bg-base-200 rounded-lg p-5 mb-4">
+                                <p class="text-lg italic">"BigKinds에서 AI 관련 뉴스를 10개 스크랩해서<br>news.html로 정리하고,<br>GitHub Pages로 자동 배포해줘."</p>
+                            </div>
+                            <p class="text-base text-base-content/80">Claude Code는 내부적으로 <code>curl</code>, <code>jq</code>, <code>gh</code> 명령을 조합하여<br>스크래핑 → 요약 → 배포의 전 과정을 자동화할 수 있습니다.</p>
+                            <div class="alert alert-success">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-5 w-5" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                                <span>한 번의 대화로 데이터 수집부터 웹 배포까지 완성!</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 10: 핵심 메시지 -->
+                <section id="slide-10" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-accent badge-lg">마무리</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">핵심 메시지</h2>
+                            <div class="bg-primary text-primary-content rounded-lg p-6 text-center space-y-4">
+                                <p class="text-2xl font-bold">"스크래핑은 데이터를 '가져오는 기술'이고,<br>CLI는 그 데이터를 '흐르게 하는 기술'입니다."</p>
+                                <p class="text-xl">"AI 없이도, AI처럼 일할 수 있다."</p>
+                            </div>
+                            <p class="text-lg text-base-content/80">이제 우리는 명령어만으로 데이터를 수집하고, 세상에 배포할 수 있습니다.</p>
+
+                            <div class="divider"></div>
+
+                            <h3 class="text-2xl font-semibold">💡 강의 흐름 요약</h3>
+                            <div class="overflow-x-auto">
+                                <table class="table table-zebra">
+                                    <thead>
+                                        <tr>
+                                            <th>단계</th>
+                                            <th>실습 내용</th>
+                                            <th>주요 명령어</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1️⃣</td>
+                                            <td>CLI 개념 및 준비</td>
+                                            <td><code>curl</code>, <code>jq</code>, <code>grep</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2️⃣</td>
+                                            <td>BigKinds 데이터 스크래핑</td>
+                                            <td><code>curl</code> 요청, JSON 저장</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3️⃣</td>
+                                            <td>데이터 가공 실습</td>
+                                            <td><code>jq</code>, <code>grep</code>, 파이프라인</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4️⃣</td>
+                                            <td>Claude Code와 협업</td>
+                                            <td>자동 요약, 파일 생성</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5️⃣</td>
+                                            <td>GitHub Pages 배포</td>
+                                            <td><code>gh</code> CLI</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6️⃣</td>
+                                            <td>전체 자동화 확장</td>
+                                            <td>Claude Code 통합 명령</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center mt-12">
+            <button id="prevBtn" class="btn btn-outline" onclick="changeSlide(-1)">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                이전
+            </button>
+            <button id="nextBtn" class="btn btn-primary" onclick="changeSlide(1)">
+                다음
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script src="../assets/chat-loader.js"></script>
+    <script src="../assets/app.js"></script>
+</body>
+</html>

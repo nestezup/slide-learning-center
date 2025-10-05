@@ -1,0 +1,315 @@
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes slideIn {
+    from { transform: translateX(20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+.slide {
+    display: none;
+}
+.slide.active {
+    display: block;
+}
+
+/* Theme transition styles */
+.theme-transition {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Base theme styles */
+body {
+    background: linear-gradient(to bottom right, var(--b1), var(--b2));
+    color: var(--bc);
+}
+
+/* Dark mode specific */
+html.dark body {
+    background: linear-gradient(to bottom right, var(--b1), var(--b2));
+    color: var(--bc);
+}
+
+/* Specific theme overrides */
+body[data-theme="bumblebee"] {
+    background: linear-gradient(to bottom right, var(--b1), var(--b2));
+    color: var(--bc);
+    --bc: oklch(20% 0 0);
+    --b1: oklch(97% 0 0);
+    --b2: oklch(92% 0 0);
+    --b3: oklch(87% 0 0);
+}
+
+body[data-theme="silk"] {
+    background: linear-gradient(to bottom right, var(--b1), var(--b2));
+    color: var(--bc);
+    --bc: oklch(40% 0.0081 61.42);
+    --b1: oklch(97% 0.0035 67.78);
+    --b2: oklch(95% 0.0081 61.42);
+    --b3: oklch(90% 0.0081 61.42);
+    --p: oklch(23.27% 0.0249 284.3);
+    --pc: oklch(94.22% 0.2505 117.44);
+    --s: oklch(23.27% 0.0249 284.3);
+    --sc: oklch(73.92% 0.2135 50.94);
+    --a: oklch(23.27% 0.0249 284.3);
+    --ac: oklch(88.92% 0.2061 189.9);
+    --n: oklch(20% 0 0);
+    --nc: oklch(80% 0.0081 61.42);
+    --inf: oklch(80.39% 0.1148 241.68);
+    --inc: oklch(30.39% 0.1148 241.68);
+    --suc: oklch(83.92% 0.0901 136.87);
+    --succ: oklch(23.92% 0.0901 136.87);
+    --war: oklch(83.92% 0.1085 80);
+    --wac: oklch(43.92% 0.1085 80);
+    --err: oklch(75.1% 0.1814 22.37);
+    --erc: oklch(35.1% 0.1814 22.37);
+}
+
+body[data-theme="silk"] #progressBar {
+    background-color: oklch(62% 0.21 50 / 0.2);
+}
+
+body[data-theme="black"] {
+    background: linear-gradient(to bottom right, var(--b1), var(--b2));
+    color: var(--bc);
+    --bc: oklch(87.609% 0 0);
+    --b1: oklch(0% 0 0);
+    --b2: oklch(19% 0 0);
+    --b3: oklch(22% 0 0);
+}
+
+
+
+/* Card content colors */
+.card {
+    background-color: var(--b1);
+    color: var(--bc);
+}
+
+#chatMessages pre {
+    padding: 1.15rem 1.5rem;
+    background-color: var(--b3);
+    border-radius: 0.9rem;
+    overflow-x: auto;
+    margin: 0.75rem 0;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+#chatMessages pre code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    line-height: 1.55;
+    display: block;
+    padding-left: 0.5rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: var(--bc);
+}
+
+#chatMessages code:not(pre code) {
+    background-color: var(--b3);
+    color: var(--bc);
+    padding: 0.2rem 0.45rem;
+    border-radius: 0.45rem;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+/* Ensure slide code samples have comfortable padding */
+.mockup-code pre {
+    padding: 0;
+}
+
+.mockup-code pre code {
+    display: block;
+    margin: 0.75rem 1.25rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.mockup-code .copy-button {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.75rem;
+    z-index: 10;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    opacity: 0.85;
+}
+
+.mockup-code .copy-button:hover {
+    transform: translateY(-2px);
+    opacity: 1;
+}
+
+.mockup-code .copy-button.copied {
+    background-color: rgba(45, 212, 191, 0.15);
+    border-color: rgba(45, 212, 191, 0.55);
+    color: rgba(16, 185, 129, 0.95);
+}
+
+/* API modal styling inspired by chat UI */
+#apiKeyModal .modal-card {
+    background: linear-gradient(160deg, rgba(28, 31, 45, 0.98), rgba(16, 18, 30, 0.98));
+    color: #f3f4f6;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+}
+
+#apiKeyModal .modal-card h3 {
+    color: #f9fafb;
+}
+
+#apiKeyModal .modal-card p {
+    color: rgba(226, 232, 240, 0.78);
+}
+
+#apiKeyModal .modal-card .label-text {
+    color: rgba(229, 231, 235, 0.88);
+}
+
+#apiKeyModal .modal-card input {
+    background-color: rgba(11, 14, 22, 0.95);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    color: #f3f4f6;
+}
+
+#apiKeyModal .modal-card input:focus {
+    border-color: rgba(94, 234, 212, 0.6);
+    box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.25);
+}
+
+#apiKeyModal .modal-card input::placeholder {
+    color: rgba(148, 163, 184, 0.5);
+}
+
+#apiKeyModal .modal-card .btn-ghost {
+    color: rgba(148, 163, 184, 0.85);
+}
+
+#apiKeyModal .modal-card .btn-ghost:hover {
+    color: #f9fafb;
+    background-color: rgba(148, 163, 184, 0.08);
+}
+
+#apiKeyModal .modal-card .btn-primary {
+    background: linear-gradient(135deg, #22d3ee, #14b8a6);
+    color: #04121c;
+    border: none;
+}
+
+#apiKeyModal .modal-card .btn-primary:hover {
+    filter: brightness(1.05);
+}
+
+#apiKeyModal .modal-card .alert {
+    background: rgba(30, 41, 59, 0.85);
+    border: 1px solid rgba(94, 234, 212, 0.25);
+    color: rgba(191, 219, 254, 0.95);
+}
+
+#apiKeyModal .modal-card .alert svg {
+    color: rgba(94, 234, 212, 0.8);
+}
+
+/* Alert colors */
+.alert {
+    color: inherit;
+}
+
+.alert-primary {
+    background-color: var(--p);
+    color: var(--pc);
+}
+
+.alert-secondary {
+    background-color: var(--s);
+    color: var(--sc);
+}
+
+.alert-accent {
+    background-color: var(--a);
+    color: var(--ac);
+}
+
+.alert-warning {
+    background-color: var(--err);
+    color: var(--erc);
+}
+
+/* Code block colors */
+code:not(pre code) {
+    background-color: var(--b3);
+    color: var(--bc);
+}
+
+/* Ensure DaisyUI code styles work with theme */
+.bg-base-300 {
+    background-color: var(--b3) !important;
+    color: var(--bc) !important;
+}
+
+pre {
+    background-color: var(--b2);
+    color: var(--bc);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+}
+
+/* Mockup code component */
+.mockup-code {
+    background-color: var(--b2);
+    color: var(--bc);
+    position: relative;
+}
+
+/* mockup-code의 ... 메뉴 제거 */
+.mockup-code::before {
+    display: none !important;
+}
+
+.mockup-code pre {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+}
+
+/* Keyboard key component */
+.kbd {
+    background-color: var(--b2);
+    color: var(--bc);
+    border-color: var(--b3);
+}
+/* Chat slide-in animation */
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutDown {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+.slide-in {
+    animation: slideInUp 0.3s ease-out forwards;
+}
+
+.slide-out {
+    animation: slideOutDown 0.3s ease-in forwards;
+}
