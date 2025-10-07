@@ -3,20 +3,15 @@
 (function() {
     const chatHTML = `
 <!-- Slide-out Chat Modal -->
-<div id="chatModal" class="hidden">
-    <div class="fixed inset-x-0 bottom-0 z-50 transform translate-y-full transition-transform duration-300" id="chatCard">
-        <div class="container mx-auto px-4 py-8 lg:py-12">
-            <div class="lg:grid lg:grid-cols-[260px_1fr] gap-8">
-                <div class="hidden lg:block"></div>
-                <div class="max-w-5xl card bg-base-100 shadow-2xl border-t-4 border-primary">
+<div id="chatModal" class="hidden fixed right-4 bottom-24 z-50">
+    <div class="card w-96 bg-base-100 shadow-2xl transform translate-y-full transition-transform duration-300" id="chatCard">
         <div class="card-body p-4">
             <div class="flex justify-between items-center mb-4 gap-3">
                 <h3 class="text-lg font-bold">🤖 슬라이드 도우미</h3>
                 <div class="flex items-center gap-2">
                     <button onclick="openApiKeyModal()" class="btn btn-sm gap-2 h-9">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
                         </svg>
                         <span id="apiKeyStatus">키 미설정</span>
                     </button>
@@ -28,7 +23,7 @@
                 </div>
             </div>
 
-            <div id="chatMessages" class="h-64 overflow-y-auto mb-4 space-y-2 bg-base-200 rounded-lg p-4">
+            <div id="chatMessages" class="h-[32rem] overflow-y-auto mb-4 space-y-2 bg-base-200 rounded-lg p-4">
                 <div class="chat chat-start">
                     <div class="chat-bubble">
                         안녕하세요! 현재 슬라이드에 대해 궁금한 점을 물어보세요.
@@ -42,7 +37,6 @@
                     <button class="btn btn-primary" onclick="sendChatMessage()">
                         보내기
                     </button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -81,7 +75,7 @@
 
             <!-- 테스트 버튼 -->
             <div class="flex gap-2">
-                <button class="btn btn-outline flex-1" onclick="testApiKey()">
+                <button class="btn btn-outline btn-secondary flex-1" onclick="testApiKey()">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
