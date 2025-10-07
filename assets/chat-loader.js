@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <div id="chatMessages" class="h-[32rem] overflow-y-auto mb-4 space-y-2 bg-base-200 rounded-lg p-4">
+            <div id="chatMessages" class="h-[24rem] overflow-y-auto mb-4 space-y-2 bg-base-200 rounded-lg p-4">
                 <div class="chat chat-start">
                     <div class="chat-bubble">
                         안녕하세요! 현재 슬라이드에 대해 궁금한 점을 물어보세요.
@@ -32,7 +32,7 @@
             </div>
 
             <div class="form-control">
-                <div class="input-group">
+                <div class="flex gap-2">
                     <input type="text" id="chatInput" placeholder="질문을 입력하세요..." class="input input-bordered flex-1" onkeypress="handleChatKeyPress(event)">
                     <button class="btn btn-primary" onclick="sendChatMessage()">
                         보내기
