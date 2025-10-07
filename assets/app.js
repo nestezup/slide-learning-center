@@ -165,6 +165,9 @@ function showSlide(index, { updateHash = true } = {}) {
             history.replaceState(null, '', newHash);
         }
     }
+
+    // Scroll to top of page instead of anchor position
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function updatePagination(index) {
