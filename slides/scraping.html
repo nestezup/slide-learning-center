@@ -53,7 +53,9 @@
                     <option>주제 개요</option>
                     <option>학습 목표</option>
                     <option>기본 명령어</option>
-                    <option>스크래핑 실습 ① - BigKinds</option>
+                    <option>네이버 블로그 검색</option>
+                    <option>블로그 내용 스크래핑</option>
+                    <option>BigKinds 실습</option>
                     <option>데이터 가공 실습</option>
                     <option>Claude Code 협업</option>
                     <option>GitHub Pages 배포 - 기존 방식</option>
@@ -72,13 +74,15 @@
                         <li><a href="#slide-1" id="sidebar-slide-0" class="flex items-center gap-3"><span class="badge badge-outline">01</span>주제 개요</a></li>
                         <li><a href="#slide-2" id="sidebar-slide-1" class="flex items-center gap-3"><span class="badge badge-outline">02</span>학습 목표</a></li>
                         <li><a href="#slide-3" id="sidebar-slide-2" class="flex items-center gap-3"><span class="badge badge-outline">03</span>기본 명령어</a></li>
-                        <li><a href="#slide-4" id="sidebar-slide-3" class="flex items-center gap-3"><span class="badge badge-outline">04</span>BigKinds 실습</a></li>
-                        <li><a href="#slide-5" id="sidebar-slide-4" class="flex items-center gap-3"><span class="badge badge-outline">05</span>데이터 가공</a></li>
-                        <li><a href="#slide-6" id="sidebar-slide-5" class="flex items-center gap-3"><span class="badge badge-outline">06</span>Claude 협업</a></li>
-                        <li><a href="#slide-7" id="sidebar-slide-6" class="flex items-center gap-3"><span class="badge badge-outline">07</span>배포 (기존)</a></li>
-                        <li><a href="#slide-8" id="sidebar-slide-7" class="flex items-center gap-3"><span class="badge badge-outline">08</span>배포 (CLI)</a></li>
-                        <li><a href="#slide-9" id="sidebar-slide-8" class="flex items-center gap-3"><span class="badge badge-outline">09</span>자동화 확장</a></li>
-                        <li><a href="#slide-10" id="sidebar-slide-9" class="flex items-center gap-3"><span class="badge badge-outline">10</span>핵심 메시지</a></li>
+                        <li><a href="#slide-4" id="sidebar-slide-3" class="flex items-center gap-3"><span class="badge badge-outline">04</span>네이버 블로그 검색</a></li>
+                        <li><a href="#slide-5" id="sidebar-slide-4" class="flex items-center gap-3"><span class="badge badge-outline">05</span>블로그 내용 스크래핑</a></li>
+                        <li><a href="#slide-6" id="sidebar-slide-5" class="flex items-center gap-3"><span class="badge badge-outline">06</span>BigKinds 실습</a></li>
+                        <li><a href="#slide-7" id="sidebar-slide-6" class="flex items-center gap-3"><span class="badge badge-outline">07</span>데이터 가공</a></li>
+                        <li><a href="#slide-8" id="sidebar-slide-7" class="flex items-center gap-3"><span class="badge badge-outline">08</span>Claude 협업</a></li>
+                        <li><a href="#slide-9" id="sidebar-slide-8" class="flex items-center gap-3"><span class="badge badge-outline">09</span>배포 (기존)</a></li>
+                        <li><a href="#slide-10" id="sidebar-slide-9" class="flex items-center gap-3"><span class="badge badge-outline">10</span>배포 (CLI)</a></li>
+                        <li><a href="#slide-11" id="sidebar-slide-10" class="flex items-center gap-3"><span class="badge badge-outline">11</span>자동화 확장</a></li>
+                        <li><a href="#slide-12" id="sidebar-slide-11" class="flex items-center gap-3"><span class="badge badge-outline">12</span>핵심 메시지</a></li>
                     </ul>
                 </div>
             </aside>
@@ -183,8 +187,103 @@
                     </div>
                 </section>
 
-                <!-- Slide 4: 스크래핑 실습 ① - BigKinds -->
+                <!-- Slide 4: 네이버 블로그 검색 실습 -->
                 <section id="slide-4" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-info badge-lg">실습 ①</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">네이버 블로그 검색 실습 🔍</h2>
+                            <div class="alert alert-info text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>💡 네이버 블로그는 CLI로 접근 가능한 대표적인 한국어 콘텐츠 소스입니다.</span>
+                            </div>
+
+                            <div class="space-y-5">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-3">(1) 기본 블로그 검색</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 네이버 블로그에서 'CLI' 관련 포스트 검색
+curl "https://search.naver.com/search.naver?where=view&sm=tab_jum&query=CLI" > naver_blog.html</code></pre>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2">→ HTML 결과가 naver_blog.html 파일에 저장됩니다.</p>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-3">(2) User-Agent 설정 (중요!)</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 브라우저처럼 보이게 헤더 추가
+curl -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)" \
+"https://search.naver.com/search.naver?where=view&query=CLI" > naver_blog.html</code></pre>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2">많은 웹사이트가 User-Agent를 확인하므로 브라우저 헤더를 흉내 내는 것이 좋습니다.</p>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-3">(3) 결과에서 블로그 제목 추출</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># HTML에서 블로그 제목만 추출
+grep -o 'data-cr-title="[^"]*"' naver_blog.html | \
+sed 's/data-cr-title="//g' | sed 's/"//g' > blog_titles.txt</code></pre>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2">grep으로 패턴 찾고, sed로 정제해서 깔끔한 제목 목록을 얻습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 5: 블로그 내용 스크래핑 심화 -->
+                <section id="slide-5" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-secondary badge-lg">실습 ②</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">블로그 내용 스크래핑 심화 📝</h2>
+                            <p class="text-lg">검색 결과에서 실제 블로그 글로 들어가 내용을 추출하는 방법입니다.</p>
+
+                            <div class="space-y-5">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-3">(1) 블로그 URL 추출</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 블로그 링크만 추출
+grep -o 'href="[^"]*blog[^"]*"' naver_blog.html | \
+sed 's/href="//g' | sed 's/"//g' > blog_urls.txt</code></pre>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-3">(2) 특정 블로그 글 가져오기</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 첫 번째 블로그 글 내용 가져오기
+first_url=$(head -1 blog_urls.txt)
+curl -H "User-Agent: Mozilla/5.0" "$first_url" > blog_content.html</code></pre>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-3">(3) 본문 내용 정제</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># HTML 태그 제거하고 텍스트만 추출
+cat blog_content.html | \
+sed 's/<[^>]*>//g' | \
+tr -s '\n' ' ' | \
+grep -o '.\{1,200\}' > clean_content.txt</code></pre>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2">HTML 태그를 제거하고, 줄바꿈을 정리해서 깔끔한 텍스트를 얻습니다.</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-base-200 rounded-lg p-5">
+                                <p class="text-lg font-semibold">💡 실용 팁</p>
+                                <p class="text-base">"실제 프로젝트에서는 <code>pup</code>이나 <code>beautifulsoup</code> 같은 전문 파서를 사용하는 것이 더 안정적입니다."</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 6: 스크래핑 실습 ③ - BigKinds -->
+                <section id="slide-6" class="slide active animate-fade-in">
                     <div class="card bg-base-100 shadow-xl">
                         <div class="card-body space-y-5">
                             <div class="badge badge-primary badge-lg">실습 1</div>
@@ -227,21 +326,21 @@ head news_titles.txt</code></pre>
                     </div>
                 </section>
 
-                <!-- Slide 5: CLI 데이터 다루기 실습 -->
-                <section id="slide-5" class="slide active animate-fade-in">
+                <!-- Slide 7: CLI 데이터 다루기 실습 -->
+                <section id="slide-7" class="slide active animate-fade-in">
                     <div class="card bg-base-100 shadow-xl">
                         <div class="card-body space-y-5">
-                            <div class="badge badge-secondary badge-lg">실습 2</div>
+                            <div class="badge badge-secondary badge-lg">실습 3</div>
                             <h2 class="card-title text-4xl lg:text-5xl">CLI 데이터 다루기 실습 🧩</h2>
                             <div class="mockup-code mb-4">
-                                <pre><code># 특정 키워드 필터링
-grep "AI" news.json > filtered.txt
+                                <pre><code># 블로그 제목에서 특정 키워드 필터링
+grep "CLI" blog_titles.txt > cli_blogs.txt
 
-# JSON에서 특정 필드 추출
-cat news.json | jq '.resultList[].CONTENT' > content.txt
+# 중복 제거하고 정렬
+sort cli_blogs.txt | uniq > unique_cli_blogs.txt
 
-# 두 명령을 연결해서 결과만 추출
-cat news.json | jq '.resultList[].TITLE' | grep "경제" > economy_titles.txt</code></pre>
+# 여러 파일 내용 합치기
+cat blog_content*.html > all_blogs.html</code></pre>
                             </div>
                             <div class="bg-base-200 rounded-lg p-5">
                                 <p class="text-lg font-semibold">💡 핵심 포인트</p>
@@ -251,15 +350,15 @@ cat news.json | jq '.resultList[].TITLE' | grep "경제" > economy_titles.txt</c
                     </div>
                 </section>
 
-                <!-- Slide 6: Claude Code와 결합하기 -->
-                <section id="slide-6" class="slide active animate-fade-in">
+                <!-- Slide 8: Claude Code와 결합하기 -->
+                <section id="slide-8" class="slide active animate-fade-in">
                     <div class="card bg-base-100 shadow-xl">
                         <div class="card-body space-y-5">
                             <div class="badge badge-accent badge-lg">협업</div>
                             <h2 class="card-title text-4xl lg:text-5xl">Claude Code와 결합하기 🤝</h2>
                             <p class="text-lg">Claude Code가 실행 중이라면 이렇게 말할 수 있습니다:</p>
                             <div class="bg-base-200 rounded-lg p-5">
-                                <p class="text-lg italic">"news_titles.txt 파일의 내용을 요약해서<br>AI 뉴스의 핵심 트렌드를 summary.txt에 정리해줘."</p>
+                                <p class="text-lg italic">"blog_titles.txt 파일의 내용을 요약해서<br>CLI 관련 블로그의 핵심 트렌드를 summary.txt에 정리해줘."</p>
                             </div>
                             <p class="text-base text-base-content/80">CLI로 데이터를 모으고, Claude로 분석 및 요약을 맡기는 협업 구조입니다.</p>
                             <div class="alert alert-success">
@@ -272,8 +371,8 @@ cat news.json | jq '.resultList[].TITLE' | grep "경제" > economy_titles.txt</c
                     </div>
                 </section>
 
-                <!-- Slide 7: GitHub Pages 배포 - 기존 방식 -->
-                <section id="slide-7" class="slide active animate-fade-in">
+                <!-- Slide 9: GitHub Pages 배포 - 기존 방식 -->
+                <section id="slide-9" class="slide active animate-fade-in">
                     <div class="card bg-base-100 shadow-xl">
                         <div class="card-body space-y-5">
                             <div class="badge badge-warning badge-lg">배포 1</div>
@@ -304,8 +403,8 @@ git push -u origin main</code></pre>
                     </div>
                 </section>
 
-                <!-- Slide 8: GitHub Pages 배포 - GitHub CLI -->
-                <section id="slide-8" class="slide active animate-fade-in">
+                <!-- Slide 10: GitHub Pages 배포 - GitHub CLI -->
+                <section id="slide-10" class="slide active animate-fade-in">
                     <div class="card bg-base-100 shadow-xl">
                         <div class="card-body space-y-5">
                             <div class="badge badge-success badge-lg">배포 2</div>
@@ -317,7 +416,7 @@ gh repo create scraping-demo --public --source=.
 
 # 커밋 및 푸시
 git add .
-git commit -m "add scraped news data"
+git commit -m "add scraped blog data"
 git push origin main
 
 # GitHub Pages 활성화
@@ -331,22 +430,22 @@ gh repo edit --enable-pages</code></pre>
                             <div class="mockup-code">
                                 <pre><code>open "https://USERNAME.github.io/scraping-demo"</code></pre>
                             </div>
-                            <p class="text-sm text-base-content/70">스크래핑한 데이터를 웹페이지로 바로 확인할 수 있습니다.</p>
+                            <p class="text-sm text-base-content/70 mt-2">스크래핑한 데이터를 웹페이지로 바로 확인할 수 있습니다.</p>
                         </div>
                     </div>
                 </section>
 
-                <!-- Slide 9: 확장 예시 - Claude Code 자동화 -->
-                <section id="slide-9" class="slide active animate-fade-in">
+                <!-- Slide 11: 확장 예시 - Claude Code 자동화 -->
+                <section id="slide-11" class="slide active animate-fade-in">
                     <div class="card bg-base-100 shadow-xl">
                         <div class="card-body space-y-5">
                             <div class="badge badge-primary badge-lg">자동화</div>
                             <h2 class="card-title text-4xl lg:text-5xl">확장 예시 — Claude Code 자동화</h2>
                             <p class="text-lg">Claude Code와 gh CLI를 함께 사용할 수도 있습니다:</p>
                             <div class="bg-base-200 rounded-lg p-5 mb-4">
-                                <p class="text-lg italic">"BigKinds에서 AI 관련 뉴스를 10개 스크랩해서<br>news.html로 정리하고,<br>GitHub Pages로 자동 배포해줘."</p>
+                                <p class="text-lg italic">"네이버 블로그에서 CLI 관련 포스트를 10개 스크랩해서<br>blogs.html로 정리하고,<br>GitHub Pages로 자동 배포해줘."</p>
                             </div>
-                            <p class="text-base text-base-content/80">Claude Code는 내부적으로 <code>curl</code>, <code>jq</code>, <code>gh</code> 명령을 조합하여<br>스크래핑 → 요약 → 배포의 전 과정을 자동화할 수 있습니다.</p>
+                            <p class="text-base text-base-content/80">Claude Code는 내부적으로 <code>curl</code>, <code>grep</code>, <code>sed</code>, <code>gh</code> 명령을 조합하여<br>스크래핑 → 요약 → 배포의 전 과정을 자동화할 수 있습니다.</p>
                             <div class="alert alert-success">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-5 w-5" fill="none" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -357,8 +456,8 @@ gh repo edit --enable-pages</code></pre>
                     </div>
                 </section>
 
-                <!-- Slide 10: 핵심 메시지 -->
-                <section id="slide-10" class="slide active animate-fade-in">
+                <!-- Slide 12: 핵심 메시지 -->
+                <section id="slide-12" class="slide active animate-fade-in">
                     <div class="card bg-base-100 shadow-xl">
                         <div class="card-body space-y-5">
                             <div class="badge badge-accent badge-lg">마무리</div>
