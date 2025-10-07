@@ -44,7 +44,7 @@
                 <!-- Header -->
                 <header class="text-center mb-6 pt-12 lg:pt-0">
                     <h1 class="text-5xl lg:text-6xl font-bold mb-3">Claude Code로 게임 만들기</h1>
-                    <p class="text-2xl text-base-content/80">상상을 코드로 바꾸는 AI 협업</p>
+                    <p class="text-2xl text-base-content/80">상상을 코드로 바꾸는 바이브코딩</p>
                 </header>
 
                 <div class="lg:hidden mb-6">
@@ -52,7 +52,7 @@
                         <span class="label-text mb-2">슬라이드 선택</span>
                         <select class="select select-bordered" onchange="goToSlide(this.selectedIndex)">
                             <option>소개</option>
-                            <option>AI 협업이란?</option>
+                            <option>바이브코딩이란?</option>
                             <option>환경 준비</option>
                             <option>첫 게임 만들기</option>
                             <option>2048 게임</option>
@@ -71,7 +71,7 @@
                             <h3 class="text-lg font-semibold">콘텐츠 목차</h3>
                             <ul class="menu menu-compact bg-base-100 rounded-box shadow-lg border border-base-200">
                                 <li><a href="#slide-1" id="sidebar-slide-0" class="flex items-center gap-3"><span class="badge badge-outline">01</span>소개</a></li>
-                                <li><a href="#slide-2" id="sidebar-slide-1" class="flex items-center gap-3"><span class="badge badge-outline">02</span>AI 협업이란?</a></li>
+                                <li><a href="#slide-2" id="sidebar-slide-1" class="flex items-center gap-3"><span class="badge badge-outline">02</span>바이브코딩이란?</a></li>
                                 <li><a href="#slide-3" id="sidebar-slide-2" class="flex items-center gap-3"><span class="badge badge-outline">03</span>환경 준비</a></li>
                                 <li><a href="#slide-4" id="sidebar-slide-3" class="flex items-center gap-3"><span class="badge badge-outline">04</span>첫 게임 만들기</a></li>
                                 <li><a href="#slide-5" id="sidebar-slide-4" class="flex items-center gap-3"><span class="badge badge-outline">05</span>2048 게임</a></li>
@@ -99,7 +99,7 @@
                         <div class="bg-base-200 rounded-lg p-5">
                             <h3 class="text-xl font-semibold mb-3">오늘의 포인트</h3>
                             <ul class="space-y-2 text-lg">
-                                <li>• AI와 협업하는 새로운 개발 방식</li>
+                                <li>• AI와 바이브코딩하는 새로운 개발 방식</li>
                                 <li>• 프롬프트로 게임 6종 만들어보기</li>
                                 <li>• 내 아이디어를 즉시 실행 가능한 코드로</li>
                             </ul>
@@ -118,14 +118,14 @@
                 <div class="card bg-base-100 shadow-xl">
                     <div class="card-body space-y-5">
                         <div class="badge badge-secondary badge-lg">개념</div>
-                        <h2 class="card-title text-4xl lg:text-5xl">AI 협업이란?</h2>
+                        <h2 class="card-title text-4xl lg:text-5xl">바이브코딩이란?</h2>
                         <ul class="space-y-3 text-lg leading-relaxed">
                             <li>• <span class="font-semibold">기존 방식</span> → 코드를 직접 작성하고, 버그를 고치고, 테스트하는 반복</li>
-                            <li>• <span class="font-semibold">AI 협업</span> → "이런 게임 만들어줘"라고 설명하면 AI가 코드 생성</li>
+                            <li>• <span class="font-semibold">바이브코딩</span> → "이런 게임 만들어줘"라고 설명하면 AI가 코드 생성</li>
                             <li>• <span class="badge badge-outline">핵심</span> 개발자가 아니라 <strong>기획자처럼</strong> 생각하기</li>
                         </ul>
                         <div class="bg-base-200 rounded-lg p-5 text-base">
-                            <p class="font-semibold mb-2">Claude Code의 3대 장점</p>
+                            <p class="font-semibold mb-2">바이브코딩의 3대 장점</p>
                             <p><strong>1. 즉시성</strong> — 생각한 아이디어를 3초 만에 실행<br>
                             <strong>2. 반복</strong> — "이 부분만 바꿔줘"로 무한 수정 가능<br>
                             <strong>3. 학습</strong> — AI가 만든 코드를 보며 자연스럽게 배움</p>
@@ -309,7 +309,7 @@ HTML, CSS, JS로 구성하고,
                 <div class="card bg-base-100 shadow-xl">
                     <div class="card-body space-y-5">
                         <div class="badge badge-primary badge-lg">팁</div>
-                        <h2 class="card-title text-4xl lg:text-5xl">AI와 대화하는 법 — 프롬프트 팁</h2>
+                        <h2 class="card-title text-4xl lg:text-5xl">AI와 바이브하는 법 — 프롬프트 팁</h2>
                         <p class="text-lg">Claude Code를 잘 활용하려면 "어떻게 요청하는가"가 중요합니다.</p>
                         <div class="space-y-4">
                             <div class="bg-base-200 rounded-lg p-4">
@@ -450,7 +450,7 @@ HTML, CSS, JS로 구성하고,
 
                 <!-- 테스트 버튼 -->
                 <div class="flex gap-2">
-                    <button class="btn btn-outline flex-1" onclick="testApiKey()">
+                    <button class="btn btn-outline btn-secondary flex-1" onclick="testApiKey()">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
