@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLI로 웹 정보 수집하기 - 스크래핑 중심</title>
+    <title>CLI로 웹 스크래핑하기</title>
     <script src="../assets/setup.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
@@ -42,8 +42,8 @@
     <div class="container mx-auto px-4 py-8 lg:py-12">
         <!-- Header -->
         <header class="text-center mb-6 pt-12 lg:pt-0">
-            <h1 class="text-5xl lg:text-6xl font-bold mb-3">CLI로 웹 정보 수집하기 🌐</h1>
-            <p class="text-2xl text-base-content/80">스크래핑으로 데이터를 수집하고, 명령어로 세상에 배포하기</p>
+            <h1 class="text-5xl lg:text-6xl font-bold mb-3">CLI로 웹 스크래핑하기 🌐</h1>
+            <p class="text-2xl text-base-content/80">curl과 pup으로 웹 데이터를 자유자재로 수집하기</p>
         </header>
 
         <div class="lg:hidden mb-6">
@@ -52,16 +52,14 @@
                 <select class="select select-bordered" onchange="goToSlide(this.selectedIndex)">
                     <option>주제 개요</option>
                     <option>학습 목표</option>
-                    <option>기본 명령어</option>
-                    <option>네이버 블로그 검색</option>
-                    <option>블로그 내용 스크래핑</option>
-                    <option>BigKinds 실습</option>
-                    <option>데이터 가공 실습</option>
-                    <option>Claude Code 협업</option>
-                    <option>GitHub Pages 배포 - 기존 방식</option>
-                    <option>GitHub Pages 배포 - GitHub CLI</option>
-                    <option>자동화 확장</option>
-                    <option>핵심 메시지</option>
+                    <option>curl 기본</option>
+                    <option>pup 설치</option>
+                    <option>셀렉터 찾기</option>
+                    <option>AI타임즈 실습</option>
+                    <option>빅카인즈 JSON</option>
+                    <option>추가 연습 주제</option>
+                    <option>Claude 협업</option>
+                    <option>정리</option>
                 </select>
             </label>
         </div>
@@ -73,16 +71,14 @@
                     <ul class="menu menu-compact bg-base-100 rounded-box shadow-lg border border-base-200">
                         <li><a href="#slide-1" id="sidebar-slide-0" class="flex items-center gap-3"><span class="badge badge-outline">01</span>주제 개요</a></li>
                         <li><a href="#slide-2" id="sidebar-slide-1" class="flex items-center gap-3"><span class="badge badge-outline">02</span>학습 목표</a></li>
-                        <li><a href="#slide-3" id="sidebar-slide-2" class="flex items-center gap-3"><span class="badge badge-outline">03</span>기본 명령어</a></li>
-                        <li><a href="#slide-4" id="sidebar-slide-3" class="flex items-center gap-3"><span class="badge badge-outline">04</span>네이버 블로그 검색</a></li>
-                        <li><a href="#slide-5" id="sidebar-slide-4" class="flex items-center gap-3"><span class="badge badge-outline">05</span>블로그 내용 스크래핑</a></li>
-                        <li><a href="#slide-6" id="sidebar-slide-5" class="flex items-center gap-3"><span class="badge badge-outline">06</span>BigKinds 실습</a></li>
-                        <li><a href="#slide-7" id="sidebar-slide-6" class="flex items-center gap-3"><span class="badge badge-outline">07</span>데이터 가공</a></li>
-                        <li><a href="#slide-8" id="sidebar-slide-7" class="flex items-center gap-3"><span class="badge badge-outline">08</span>Claude 협업</a></li>
-                        <li><a href="#slide-9" id="sidebar-slide-8" class="flex items-center gap-3"><span class="badge badge-outline">09</span>배포 (기존)</a></li>
-                        <li><a href="#slide-10" id="sidebar-slide-9" class="flex items-center gap-3"><span class="badge badge-outline">10</span>배포 (CLI)</a></li>
-                        <li><a href="#slide-11" id="sidebar-slide-10" class="flex items-center gap-3"><span class="badge badge-outline">11</span>자동화 확장</a></li>
-                        <li><a href="#slide-12" id="sidebar-slide-11" class="flex items-center gap-3"><span class="badge badge-outline">12</span>핵심 메시지</a></li>
+                        <li><a href="#slide-3" id="sidebar-slide-2" class="flex items-center gap-3"><span class="badge badge-outline">03</span>curl 기본</a></li>
+                        <li><a href="#slide-4" id="sidebar-slide-3" class="flex items-center gap-3"><span class="badge badge-outline">04</span>pup 설치</a></li>
+                        <li><a href="#slide-5" id="sidebar-slide-4" class="flex items-center gap-3"><span class="badge badge-outline">05</span>셀렉터 찾기</a></li>
+                        <li><a href="#slide-6" id="sidebar-slide-5" class="flex items-center gap-3"><span class="badge badge-outline">06</span>AI타임즈 실습</a></li>
+                        <li><a href="#slide-7" id="sidebar-slide-6" class="flex items-center gap-3"><span class="badge badge-outline">07</span>빅카인즈 JSON</a></li>
+                        <li><a href="#slide-8" id="sidebar-slide-7" class="flex items-center gap-3"><span class="badge badge-outline">08</span>추가 연습 주제</a></li>
+                        <li><a href="#slide-9" id="sidebar-slide-8" class="flex items-center gap-3"><span class="badge badge-outline">09</span>Claude 협업</a></li>
+                        <li><a href="#slide-10" id="sidebar-slide-9" class="flex items-center gap-3"><span class="badge badge-outline">10</span>정리</a></li>
                     </ul>
                 </div>
             </aside>
@@ -98,16 +94,33 @@
                     <div class="card bg-base-100 shadow-xl">
                         <div class="card-body space-y-5">
                             <div class="badge badge-primary badge-lg">Intro</div>
-                            <h2 class="card-title text-4xl lg:text-5xl">주제 개요</h2>
+                            <h2 class="card-title text-4xl lg:text-5xl">웹 스크래핑이란? 🕷️</h2>
                             <div class="bg-base-200 rounded-lg p-5">
-                                <p class="text-xl italic mb-4">"이제는 AI뿐만 아니라,<br>명령어로 직접 웹 데이터를 가져올 수 있습니다."</p>
+                                <p class="text-xl italic mb-4">"웹 페이지에서 필요한 데이터만<br>자동으로 추출하는 기술"</p>
                             </div>
-                            <p class="text-lg text-base-content/80">Claude Code는 AI를 CLI 안으로 가져온 도구였다면, 이번에는 <span class="font-semibold">CLI 자체를 활용해서 웹 데이터를 다루는 방법</span>을 배웁니다.</p>
-                            <div class="alert alert-info text-base">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-5 w-5" fill="none" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span>CLI는 단순히 로컬 파일 조작 도구가 아니라, <strong>웹과 서버를 직접 연결하는 강력한 인터페이스</strong>입니다.</span>
+                            <p class="text-lg text-base-content/80">브라우저를 열지 않고도 <span class="font-semibold">CLI 명령어로 웹 데이터를 가져오고 가공</span>할 수 있습니다.</p>
+                            <div class="space-y-3">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-2xl">📊</span>
+                                    <div>
+                                        <p class="font-semibold">정적 페이지 스크래핑</p>
+                                        <p class="text-sm text-base-content/70">HTML을 가져와서 원하는 부분만 추출</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-2xl">🔌</span>
+                                    <div>
+                                        <p class="font-semibold">API 호출</p>
+                                        <p class="text-sm text-base-content/70">서버에서 JSON 데이터를 직접 받아오기</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-2xl">🤖</span>
+                                    <div>
+                                        <p class="font-semibold">Claude Code와 협업</p>
+                                        <p class="text-sm text-base-content/70">수집한 데이터를 AI로 분석하고 요약</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -118,401 +131,435 @@
                     <div class="card bg-base-100 shadow-xl">
                         <div class="card-body space-y-5">
                             <div class="badge badge-secondary badge-lg">목표</div>
-                            <h2 class="card-title text-4xl lg:text-5xl">학습 목표</h2>
+                            <h2 class="card-title text-4xl lg:text-5xl">학습 목표 🎯</h2>
                             <ul class="space-y-3 text-lg leading-relaxed">
-                                <li>• <code>curl</code> 명령으로 웹 데이터 요청하기</li>
-                                <li>• <code>grep</code>, <code>jq</code>로 필요한 부분만 추출하기</li>
-                                <li>• CLI 파이프(<code>|</code>), 리다이렉션(<code>&gt;</code>, <code>&gt;&gt;</code>)의 실제 활용</li>
-                                <li>• Claude Code와 연동하여 자동 요약하기</li>
-                                <li>• GitHub CLI를 이용해 <strong>스크래핑 결과를 웹에 배포하기</strong></li>
+                                <li>✅ <code>curl</code>로 웹 페이지와 API 데이터 가져오기</li>
+                                <li>✅ <code>pup</code>으로 HTML에서 원하는 요소만 추출하기</li>
+                                <li>✅ 브라우저 개발자 도구로 CSS 셀렉터 찾는 법</li>
+                                <li>✅ 실전 예시: AI타임즈, 빅카인즈, 네이버 블로그</li>
+                                <li>✅ Claude Code와 협업하여 데이터 분석하기</li>
                             </ul>
                             <div class="bg-base-200 rounded-lg p-5 text-base">
-                                <p class="font-semibold mb-2">이 강의를 마치면</p>
-                                <p>웹 데이터를 수집하고, 가공하고, 배포하는 전체 파이프라인을 CLI만으로 구축할 수 있게 됩니다.</p>
+                                <p class="font-semibold mb-2">💡 이 강의를 마치면</p>
+                                <p>뉴스, 블로그, 쇼핑몰 등 대부분의 웹사이트에서 데이터를 자동으로 수집할 수 있습니다.</p>
                             </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Slide 3: 기본 명령어 정리 -->
-                <section id="slide-3" class="slide active animate-fade-in">
-                    <div class="card bg-base-100 shadow-xl">
-                        <div class="card-body space-y-5">
-                            <div class="badge badge-accent badge-lg">기본</div>
-                            <h2 class="card-title text-4xl lg:text-5xl">기본 명령어 정리</h2>
-                            <div class="overflow-x-auto">
-                                <table class="table table-zebra">
-                                    <thead>
-                                        <tr>
-                                            <th>명령어</th>
-                                            <th>역할</th>
-                                            <th>예시</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><code>curl</code></td>
-                                            <td>웹 요청 (HTTP GET/POST)</td>
-                                            <td><code>curl https://example.com</code></td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>grep</code></td>
-                                            <td>텍스트에서 특정 단어 검색</td>
-                                            <td><code>grep "AI" news.json</code></td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>jq</code></td>
-                                            <td>JSON 데이터 파싱/정제</td>
-                                            <td><code>cat news.json | jq '.resultList[].TITLE'</code></td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>|</code> (파이프)</td>
-                                            <td>명령 결과를 다음 명령의 입력으로 전달</td>
-                                            <td><code>cat a.txt | grep "error"</code></td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>&gt;</code> (리다이렉션)</td>
-                                            <td>결과를 새 파일로 저장</td>
-                                            <td><code>echo "data" &gt; log.txt</code></td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>&gt;&gt;</code> (추가 저장)</td>
-                                            <td>기존 파일에 이어쓰기</td>
-                                            <td><code>echo "추가" &gt;&gt; log.txt</code></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Slide 4: 네이버 블로그 검색 실습 -->
-                <section id="slide-4" class="slide active animate-fade-in">
-                    <div class="card bg-base-100 shadow-xl">
-                        <div class="card-body space-y-5">
-                            <div class="badge badge-info badge-lg">실습 ①</div>
-                            <h2 class="card-title text-4xl lg:text-5xl">네이버 블로그 검색 실습 🔍</h2>
-                            <div class="alert alert-info text-sm">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span>💡 네이버 블로그는 CLI로 접근 가능한 대표적인 한국어 콘텐츠 소스입니다.</span>
-                            </div>
-
-                            <div class="space-y-5">
-                                <div>
-                                    <h3 class="text-xl font-semibold mb-3">(1) 기본 블로그 검색</h3>
-                                    <div class="mockup-code">
-                                        <pre><code># 네이버 블로그에서 'CLI' 관련 포스트 검색
-curl "https://search.naver.com/search.naver?where=view&sm=tab_jum&query=CLI" > naver_blog.html</code></pre>
-                                    </div>
-                                    <p class="text-sm text-base-content/70 mt-2">→ HTML 결과가 naver_blog.html 파일에 저장됩니다.</p>
-                                </div>
-
-                                <div>
-                                    <h3 class="text-xl font-semibold mb-3">(2) User-Agent 설정 (중요!)</h3>
-                                    <div class="mockup-code">
-                                        <pre><code># 브라우저처럼 보이게 헤더 추가
-curl -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)" \
-"https://search.naver.com/search.naver?where=view&query=CLI" > naver_blog.html</code></pre>
-                                    </div>
-                                    <p class="text-sm text-base-content/70 mt-2">많은 웹사이트가 User-Agent를 확인하므로 브라우저 헤더를 흉내 내는 것이 좋습니다.</p>
-                                </div>
-
-                                <div>
-                                    <h3 class="text-xl font-semibold mb-3">(3) 결과에서 블로그 제목 추출</h3>
-                                    <div class="mockup-code">
-                                        <pre><code># HTML에서 블로그 제목만 추출
-grep -o 'data-cr-title="[^"]*"' naver_blog.html | \
-sed 's/data-cr-title="//g' | sed 's/"//g' > blog_titles.txt</code></pre>
-                                    </div>
-                                    <p class="text-sm text-base-content/70 mt-2">grep으로 패턴 찾고, sed로 정제해서 깔끔한 제목 목록을 얻습니다.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Slide 5: 블로그 내용 스크래핑 심화 -->
-                <section id="slide-5" class="slide active animate-fade-in">
-                    <div class="card bg-base-100 shadow-xl">
-                        <div class="card-body space-y-5">
-                            <div class="badge badge-secondary badge-lg">실습 ②</div>
-                            <h2 class="card-title text-4xl lg:text-5xl">블로그 내용 스크래핑 심화 📝</h2>
-                            <p class="text-lg">검색 결과에서 실제 블로그 글로 들어가 내용을 추출하는 방법입니다.</p>
-
-                            <div class="space-y-5">
-                                <div>
-                                    <h3 class="text-xl font-semibold mb-3">(1) 블로그 URL 추출</h3>
-                                    <div class="mockup-code">
-                                        <pre><code># 블로그 링크만 추출
-grep -o 'href="[^"]*blog[^"]*"' naver_blog.html | \
-sed 's/href="//g' | sed 's/"//g' > blog_urls.txt</code></pre>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <h3 class="text-xl font-semibold mb-3">(2) 특정 블로그 글 가져오기</h3>
-                                    <div class="mockup-code">
-                                        <pre><code># 첫 번째 블로그 글 내용 가져오기
-first_url=$(head -1 blog_urls.txt)
-curl -H "User-Agent: Mozilla/5.0" "$first_url" > blog_content.html</code></pre>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <h3 class="text-xl font-semibold mb-3">(3) 본문 내용 정제</h3>
-                                    <div class="mockup-code">
-                                        <pre><code># HTML 태그 제거하고 텍스트만 추출
-cat blog_content.html | \
-sed 's/<[^>]*>//g' | \
-tr -s '\n' ' ' | \
-grep -o '.\{1,200\}' > clean_content.txt</code></pre>
-                                    </div>
-                                    <p class="text-sm text-base-content/70 mt-2">HTML 태그를 제거하고, 줄바꿈을 정리해서 깔끔한 텍스트를 얻습니다.</p>
-                                </div>
-                            </div>
-
-                            <div class="bg-base-200 rounded-lg p-5">
-                                <p class="text-lg font-semibold">💡 실용 팁</p>
-                                <p class="text-base">"실제 프로젝트에서는 <code>pup</code>이나 <code>beautifulsoup</code> 같은 전문 파서를 사용하는 것이 더 안정적입니다."</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Slide 6: 스크래핑 실습 ③ - BigKinds -->
-                <section id="slide-6" class="slide active animate-fade-in">
-                    <div class="card bg-base-100 shadow-xl">
-                        <div class="card-body space-y-5">
-                            <div class="badge badge-primary badge-lg">실습 1</div>
-                            <h2 class="card-title text-4xl lg:text-5xl">스크래핑 실습 ① — BigKinds 뉴스 데이터 📰</h2>
-                            <div class="alert alert-info text-sm">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span>💡 BigKinds는 한국언론진흥재단이 운영하는 뉴스 데이터 서비스입니다.</span>
-                            </div>
-
-                            <div class="space-y-5">
-                                <div>
-                                    <h3 class="text-xl font-semibold mb-3">(1) 뉴스 검색 요청</h3>
-                                    <div class="mockup-code">
-                                        <pre><code>curl "https://www.bigkinds.or.kr/api/news/search.do?q=AI" > news.json</code></pre>
-                                    </div>
-                                    <p class="text-sm text-base-content/70 mt-2">→ news.json 파일이 생성됩니다.</p>
-                                </div>
-
-                                <div>
-                                    <h3 class="text-xl font-semibold mb-3">(2) 결과 확인</h3>
-                                    <div class="mockup-code">
-                                        <pre><code>cat news.json | jq '.resultList | length'
-cat news.json | jq '.resultList[].TITLE'</code></pre>
-                                    </div>
-                                    <p class="text-sm text-base-content/70 mt-2">첫 번째 명령은 기사 개수를, 두 번째 명령은 기사 제목만 출력합니다.</p>
-                                </div>
-
-                                <div>
-                                    <h3 class="text-xl font-semibold mb-3">(3) 결과 저장</h3>
-                                    <div class="mockup-code">
-                                        <pre><code>cat news.json | jq '.resultList[].TITLE' > news_titles.txt
-head news_titles.txt</code></pre>
-                                    </div>
-                                    <p class="text-sm text-base-content/70 mt-2">결과를 파일로 저장한 뒤, 일부 내용을 미리 확인합니다.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Slide 7: CLI 데이터 다루기 실습 -->
-                <section id="slide-7" class="slide active animate-fade-in">
-                    <div class="card bg-base-100 shadow-xl">
-                        <div class="card-body space-y-5">
-                            <div class="badge badge-secondary badge-lg">실습 3</div>
-                            <h2 class="card-title text-4xl lg:text-5xl">CLI 데이터 다루기 실습 🧩</h2>
-                            <div class="mockup-code mb-4">
-                                <pre><code># 블로그 제목에서 특정 키워드 필터링
-grep "CLI" blog_titles.txt > cli_blogs.txt
-
-# 중복 제거하고 정렬
-sort cli_blogs.txt | uniq > unique_cli_blogs.txt
-
-# 여러 파일 내용 합치기
-cat blog_content*.html > all_blogs.html</code></pre>
-                            </div>
-                            <div class="bg-base-200 rounded-lg p-5">
-                                <p class="text-lg font-semibold">💡 핵심 포인트</p>
-                                <p class="text-base">"명령어를 연결하면, 데이터 가공 과정이 하나의 '파이프라인'이 된다."</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Slide 8: Claude Code와 결합하기 -->
-                <section id="slide-8" class="slide active animate-fade-in">
-                    <div class="card bg-base-100 shadow-xl">
-                        <div class="card-body space-y-5">
-                            <div class="badge badge-accent badge-lg">협업</div>
-                            <h2 class="card-title text-4xl lg:text-5xl">Claude Code와 결합하기 🤝</h2>
-                            <p class="text-lg">Claude Code가 실행 중이라면 이렇게 말할 수 있습니다:</p>
-                            <div class="bg-base-200 rounded-lg p-5">
-                                <p class="text-lg italic">"blog_titles.txt 파일의 내용을 요약해서<br>CLI 관련 블로그의 핵심 트렌드를 summary.txt에 정리해줘."</p>
-                            </div>
-                            <p class="text-base text-base-content/80">CLI로 데이터를 모으고, Claude로 분석 및 요약을 맡기는 협업 구조입니다.</p>
-                            <div class="alert alert-success">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-5 w-5" fill="none" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span>데이터 수집(CLI) + 분석(AI) = 강력한 자동화 워크플로우</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Slide 9: GitHub Pages 배포 - 기존 방식 -->
-                <section id="slide-9" class="slide active animate-fade-in">
-                    <div class="card bg-base-100 shadow-xl">
-                        <div class="card-body space-y-5">
-                            <div class="badge badge-warning badge-lg">배포 1</div>
-                            <h2 class="card-title text-4xl lg:text-5xl">결과를 GitHub Pages에 배포하기 🚀</h2>
-                            <h3 class="text-2xl font-semibold">(1) 기존 방식 (복잡한 설정)</h3>
-                            <ol class="list-decimal pl-6 space-y-2 text-base">
-                                <li>GitHub 접속 → 새 리포지토리 생성</li>
-                                <li>로컬에서 다음 명령 수행:</li>
-                            </ol>
-                            <div class="mockup-code mb-3">
-                                <pre><code>git init
-git add .
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/USERNAME/demo.git
-git push -u origin main</code></pre>
-                            </div>
-                            <ol start="3" class="list-decimal pl-6 space-y-2 text-base">
-                                <li>GitHub → Settings → Pages → main 브랜치 선택</li>
-                            </ol>
                             <div class="alert alert-warning text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 5c-.77-1.333-2.694-1.333-3.464 0L4.34 16c-.77 1.333.192 3 1.732 3z" />
                                 </svg>
-                                <span>단계가 많고, 초보자에겐 헷갈립니다.</span>
+                                <span><strong>주의:</strong> 웹 스크래핑 시 해당 사이트의 이용약관과 robots.txt를 확인하세요.</span>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- Slide 10: GitHub Pages 배포 - GitHub CLI -->
-                <section id="slide-10" class="slide active animate-fade-in">
+                <!-- Slide 3: curl 기본 -->
+                <section id="slide-3" class="slide active animate-fade-in">
                     <div class="card bg-base-100 shadow-xl">
                         <div class="card-body space-y-5">
-                            <div class="badge badge-success badge-lg">배포 2</div>
-                            <h2 class="card-title text-4xl lg:text-5xl">(2) GitHub CLI (gh)로 간단하게</h2>
-                            <p class="text-lg">CLI로 모든 과정을 한 번에 처리할 수 있습니다.</p>
-                            <div class="mockup-code mb-4">
-                                <pre><code># 리포지토리 생성
-gh repo create scraping-demo --public --source=.
+                            <div class="badge badge-accent badge-lg">기본</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">curl 기본 사용법 📡</h2>
+                            <p class="text-lg">curl은 <strong>URL을 통해 데이터를 전송하는 CLI 도구</strong>입니다.</p>
+                            
+                            <div class="space-y-4">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(1) 기본 요청</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 웹 페이지 HTML 가져오기
+curl https://www.aitimes.com</code></pre>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2">→ 화면에 HTML이 출력됩니다.</p>
+                                </div>
 
-# 커밋 및 푸시
-git add .
-git commit -m "add scraped blog data"
-git push origin main
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(2) 파일로 저장</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 결과를 파일로 저장
+curl https://www.aitimes.com > aitimes.html</code></pre>
+                                    </div>
+                                </div>
 
-# GitHub Pages 활성화
-gh repo edit --enable-pages</code></pre>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(3) User-Agent 헤더 추가</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 브라우저처럼 보이기
+curl -H "User-Agent: Mozilla/5.0" https://www.aitimes.com</code></pre>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2">많은 사이트가 봇 차단을 위해 User-Agent를 확인합니다.</p>
+                                </div>
                             </div>
+
+                            <div class="alert alert-info text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>💡 <code>fetch</code>는 JavaScript 함수, <code>curl</code>은 CLI 명령어입니다.</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 4: pup 설치 -->
+                <section id="slide-4" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-info badge-lg">도구</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">pup 설치하기 🔧</h2>
+                            <p class="text-lg"><code>pup</code>은 HTML 파싱을 위한 CLI 도구입니다. CSS 셀렉터로 원하는 요소를 쉽게 추출할 수 있습니다.</p>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">macOS 설치</h3>
+                                    <div class="mockup-code">
+                                        <pre><code>brew install pup</code></pre>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Windows (Scoop 사용)</h3>
+                                    <div class="mockup-code">
+                                        <pre><code>scoop install pup</code></pre>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Linux</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># Go로 설치
+go install github.com/ericchiang/pup@latest</code></pre>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">설치 확인</h3>
+                                    <div class="mockup-code">
+                                        <pre><code>pup --version</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="bg-base-200 rounded-lg p-5">
-                                <p class="text-lg font-semibold">💡 포인트</p>
-                                <p class="text-base">"이제 브라우저를 열지 않아도, CLI 한 줄로 배포가 가능합니다."</p>
+                                <p class="font-semibold mb-2">💡 pup이 필요한 이유</p>
+                                <p class="text-base">grep과 sed로도 HTML 파싱이 가능하지만, CSS 셀렉터를 사용하는 pup이 훨씬 간단하고 정확합니다.</p>
                             </div>
-                            <h3 class="text-xl font-semibold">(3) 사이트 열기</h3>
-                            <div class="mockup-code">
-                                <pre><code>open "https://USERNAME.github.io/scraping-demo"</code></pre>
-                            </div>
-                            <p class="text-sm text-base-content/70 mt-2">스크래핑한 데이터를 웹페이지로 바로 확인할 수 있습니다.</p>
                         </div>
                     </div>
                 </section>
 
-                <!-- Slide 11: 확장 예시 - Claude Code 자동화 -->
-                <section id="slide-11" class="slide active animate-fade-in">
+                <!-- Slide 5: 셀렉터 찾기 -->
+                <section id="slide-5" class="slide active animate-fade-in">
                     <div class="card bg-base-100 shadow-xl">
                         <div class="card-body space-y-5">
-                            <div class="badge badge-primary badge-lg">자동화</div>
-                            <h2 class="card-title text-4xl lg:text-5xl">확장 예시 — Claude Code 자동화</h2>
-                            <p class="text-lg">Claude Code와 gh CLI를 함께 사용할 수도 있습니다:</p>
-                            <div class="bg-base-200 rounded-lg p-5 mb-4">
-                                <p class="text-lg italic">"네이버 블로그에서 CLI 관련 포스트를 10개 스크랩해서<br>blogs.html로 정리하고,<br>GitHub Pages로 자동 배포해줘."</p>
+                            <div class="badge badge-secondary badge-lg">기술</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">CSS 셀렉터 찾는 법 🎯</h2>
+                            <p class="text-lg">브라우저 개발자 도구를 사용하면 원하는 요소의 셀렉터를 쉽게 찾을 수 있습니다.</p>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">1단계: 개발자 도구 열기</h3>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div class="bg-base-200 rounded-lg p-3">
+                                            <p class="font-semibold">macOS</p>
+                                            <p class="text-sm"><kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>I</kbd></p>
+                                        </div>
+                                        <div class="bg-base-200 rounded-lg p-3">
+                                            <p class="font-semibold">Windows</p>
+                                            <p class="text-sm"><kbd>F12</kbd> 또는 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">2단계: 요소 선택</h3>
+                                    <ol class="list-decimal pl-6 space-y-2 text-base">
+                                        <li>개발자 도구 왼쪽 상단의 <strong>선택 도구</strong>(화살표 아이콘) 클릭</li>
+                                        <li>웹 페이지에서 원하는 요소에 마우스 올리기</li>
+                                        <li>요소 클릭</li>
+                                    </ol>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">3단계: 셀렉터 복사</h3>
+                                    <ol class="list-decimal pl-6 space-y-2 text-base">
+                                        <li>Elements 탭에서 선택된 요소에 <strong>우클릭</strong></li>
+                                        <li><strong>Copy</strong> → <strong>Copy selector</strong> 선택</li>
+                                    </ol>
+                                </div>
                             </div>
-                            <p class="text-base text-base-content/80">Claude Code는 내부적으로 <code>curl</code>, <code>grep</code>, <code>sed</code>, <code>gh</code> 명령을 조합하여<br>스크래핑 → 요약 → 배포의 전 과정을 자동화할 수 있습니다.</p>
+
+                            <div class="bg-base-200 rounded-lg p-5">
+                                <p class="font-semibold mb-2">💡 예시</p>
+                                <p class="text-sm font-mono">#section-list > ul > li:nth-child(1) > div > h2</p>
+                                <p class="text-sm text-base-content/70 mt-2">이런 형태의 CSS 셀렉터가 복사됩니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 6: AI타임즈 실습 -->
+                <section id="slide-6" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-primary badge-lg">실습 1</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">AI타임즈 스크래핑 실습 📰</h2>
+                            <p class="text-base">AI타임즈에서 "클로드" 검색 결과를 스크래핑해봅시다.</p>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(1) HTML 가져오기</h3>
+                                    <div class="mockup-code">
+                                        <pre><code>curl "https://www.aitimes.com/news/articleList.html?sc_area=A&view_type=sm&sc_word=%ED%81%B4%EB%A1%9C%EB%93%9C" \
+  -o aitimes_claude.html</code></pre>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(2) 기사 리스트 추출</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 전체 기사 리스트 영역
+cat aitimes_claude.html | pup '#section-list > ul'</code></pre>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(3) 첫 번째 기사 제목만 추출</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 첫 번째 기사 제목
+cat aitimes_claude.html | \
+  pup '#section-list > ul > li:nth-child(1) > div > h2 text{}'</code></pre>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2"><code>text{}</code>는 HTML 태그를 제거하고 텍스트만 추출합니다.</p>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(4) 모든 기사 제목 추출</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 모든 h2 제목 추출
+cat aitimes_claude.html | \
+  pup '#section-list h2 text{}' > aitimes_titles.txt</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 7: 빅카인즈 JSON API -->
+                <section id="slide-7" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-secondary badge-lg">실습 2</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">빅카인즈 JSON API 호출 🔌</h2>
+                            <p class="text-base">브라우저 네트워크 탭에서 API 요청을 찾아 curl로 재현할 수 있습니다.</p>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(1) 네트워크 탭에서 복사</h3>
+                                    <ol class="list-decimal pl-6 space-y-1 text-sm">
+                                        <li>빅카인즈 사이트에서 검색 실행</li>
+                                        <li>개발자 도구 → Network 탭 열기</li>
+                                        <li><code>search.do</code> 요청 우클릭 → Copy → Copy as cURL</li>
+                                    </ol>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(2) curl 명령어 실행</h3>
+                                    <div class="mockup-code text-xs">
+                                        <pre><code>curl 'https://www.bigkinds.or.kr/api/news/search.do' \
+  -H 'Content-Type: application/json' \
+  --data-raw '{"indexName":"news","searchKey":"클로드","startDate":"2025-07-09","endDate":"2025-10-09","startNo":1,"resultNumber":10}' \
+  -o bigkinds_result.json</code></pre>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(3) jq로 제목만 추출</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 첫 번째 기사 제목
+cat bigkinds_result.json | jq '.resultList[0].TITLE'
+
+# 모든 기사 제목
+cat bigkinds_result.json | jq '.resultList[].TITLE' > bigkinds_titles.txt</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-base-200 rounded-lg p-5">
+                                <p class="font-semibold mb-2">💡 Tip</p>
+                                <p class="text-sm">JSON API는 HTML 파싱보다 훨씬 정확하고 안정적입니다. 가능하면 API를 먼저 찾아보세요!</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 8: 추가 연습 주제 제안 -->
+                <section id="slide-8" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-info badge-lg">추가 연습</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">추가로 연습할 수 있는 주제들 💡</h2>
+                            <p class="text-lg">같은 방법으로 다양한 웹사이트를 스크래핑할 수 있습니다.</p>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-base-200 rounded-lg p-4">
+                                    <h3 class="text-xl font-semibold mb-2">📰 뉴스 검색</h3>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 네이버 뉴스 검색</li>
+                                        <li>• 다음 뉴스</li>
+                                        <li>• 구글 뉴스</li>
+                                        <li>• RSS 피드 파싱</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-base-200 rounded-lg p-4">
+                                    <h3 class="text-xl font-semibold mb-2">📈 주식 정보</h3>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 네이버 금융 시세</li>
+                                        <li>• 야후 파이낸스 API</li>
+                                        <li>• 증권사 시세 정보</li>
+                                        <li>• 환율 정보</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-base-200 rounded-lg p-4">
+                                    <h3 class="text-xl font-semibold mb-2">🏠 부동산 정보</h3>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 네이버 부동산</li>
+                                        <li>• 직방 매물 정보</li>
+                                        <li>• 국토교통부 실거래가</li>
+                                        <li>• 아파트 시세 동향</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-base-200 rounded-lg p-4">
+                                    <h3 class="text-xl font-semibold mb-2">🛍️ 쇼핑몰 가격 비교</h3>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 쿠팡 상품 검색</li>
+                                        <li>• 네이버 쇼핑 최저가</li>
+                                        <li>• 다나와 가격 비교</li>
+                                        <li>• 아마존 상품 정보</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-base-200 rounded-lg p-4">
+                                    <h3 class="text-xl font-semibold mb-2">🌦️ 날씨 & 생활 정보</h3>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 기상청 날씨 API</li>
+                                        <li>• 미세먼지 정보</li>
+                                        <li>• 지역별 날씨 예보</li>
+                                        <li>• 공공데이터 포털</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-base-200 rounded-lg p-4">
+                                    <h3 class="text-xl font-semibold mb-2">💻 개발자 정보</h3>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• GitHub 트렌딩</li>
+                                        <li>• Stack Overflow 질문</li>
+                                        <li>• npm 패키지 정보</li>
+                                        <li>• 채용 공고 (원티드, 로켓펀치)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
                             <div class="alert alert-success">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-5 w-5" fill="none" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                                 </svg>
-                                <span>한 번의 대화로 데이터 수집부터 웹 배포까지 완성!</span>
+                                <span>동일한 패턴으로 <strong>거의 모든 웹사이트</strong>에서 데이터를 수집할 수 있습니다!</span>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- Slide 12: 핵심 메시지 -->
-                <section id="slide-12" class="slide active animate-fade-in">
+                <!-- Slide 9: Claude Code 협업 -->
+                <section id="slide-9" class="slide active animate-fade-in">
                     <div class="card bg-base-100 shadow-xl">
                         <div class="card-body space-y-5">
-                            <div class="badge badge-accent badge-lg">마무리</div>
-                            <h2 class="card-title text-4xl lg:text-5xl">핵심 메시지</h2>
-                            <div class="bg-primary text-primary-content rounded-lg p-6 text-center space-y-4">
-                                <p class="text-2xl font-bold">"스크래핑은 데이터를 '가져오는 기술'이고,<br>CLI는 그 데이터를 '흐르게 하는 기술'입니다."</p>
-                                <p class="text-xl">"AI 없이도, AI처럼 일할 수 있다."</p>
+                            <div class="badge badge-success badge-lg">AI 협업</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">Claude Code와 협업하기 🤖</h2>
+                            <p class="text-lg">수집한 데이터를 Claude Code로 분석하고 요약할 수 있습니다.</p>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">예시 1: 데이터 요약</h3>
+                                    <div class="bg-base-200 rounded-lg p-4">
+                                        <p class="text-base italic">"aitimes_titles.txt 파일에 있는 클로드 관련 기사 제목들을 분석해서, 최근 클로드 기술 트렌드를 3줄로 요약해줘."</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">예시 2: 자동 스크래핑 요청</h3>
+                                    <div class="bg-base-200 rounded-lg p-4">
+                                        <p class="text-base italic">"네이버 블로그에서 'AI 개발' 검색어로 최신 5개 블로그 제목을 가져와서 파일로 저장해줘."</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">예시 3: 데이터 정제</h3>
+                                    <div class="bg-base-200 rounded-lg p-4">
+                                        <p class="text-base italic">"bigkinds_titles.txt에서 '클로드'가 포함된 제목만 필터링해서 claude_only.txt로 저장해줘."</p>
+                                    </div>
+                                </div>
                             </div>
-                            <p class="text-lg text-base-content/80">이제 우리는 명령어만으로 데이터를 수집하고, 세상에 배포할 수 있습니다.</p>
+
+                            <div class="alert alert-success">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-5 w-5" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span><strong>데이터 수집(CLI)</strong> + <strong>분석(AI)</strong> = 강력한 자동화 워크플로우!</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 10: 정리 -->
+                <section id="slide-10" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-accent badge-lg">정리</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">정리 🎯</h2>
+                            
+                            <div class="bg-primary text-primary-content rounded-lg p-6 text-center space-y-3">
+                                <p class="text-2xl font-bold">"웹 스크래핑은 인터넷을 데이터베이스처럼 사용하는 기술"</p>
+                                <p class="text-lg">curl + pup + Claude Code = 무한한 가능성</p>
+                            </div>
 
                             <div class="divider"></div>
 
-                            <h3 class="text-2xl font-semibold">💡 강의 흐름 요약</h3>
-                            <div class="overflow-x-auto">
-                                <table class="table table-zebra">
-                                    <thead>
-                                        <tr>
-                                            <th>단계</th>
-                                            <th>실습 내용</th>
-                                            <th>주요 명령어</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1️⃣</td>
-                                            <td>CLI 개념 및 준비</td>
-                                            <td><code>curl</code>, <code>jq</code>, <code>grep</code></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2️⃣</td>
-                                            <td>BigKinds 데이터 스크래핑</td>
-                                            <td><code>curl</code> 요청, JSON 저장</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3️⃣</td>
-                                            <td>데이터 가공 실습</td>
-                                            <td><code>jq</code>, <code>grep</code>, 파이프라인</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4️⃣</td>
-                                            <td>Claude Code와 협업</td>
-                                            <td>자동 요약, 파일 생성</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5️⃣</td>
-                                            <td>GitHub Pages 배포</td>
-                                            <td><code>gh</code> CLI</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6️⃣</td>
-                                            <td>전체 자동화 확장</td>
-                                            <td>Claude Code 통합 명령</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <h3 class="text-2xl font-semibold mb-3">📚 배운 내용 요약</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-base-200 rounded-lg p-4">
+                                    <h4 class="font-semibold mb-2">🔧 도구</h4>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• <code>curl</code>: 웹 데이터 가져오기</li>
+                                        <li>• <code>pup</code>: CSS 셀렉터로 파싱</li>
+                                        <li>• <code>jq</code>: JSON 데이터 처리</li>
+                                        <li>• <code>grep/sed</code>: 텍스트 정제</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-base-200 rounded-lg p-4">
+                                    <h4 class="font-semibold mb-2">💡 실습</h4>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• AI타임즈 HTML 스크래핑</li>
+                                        <li>• 빅카인즈 JSON API 호출</li>
+                                        <li>• 다양한 응용 주제 확인</li>
+                                        <li>• Claude Code와 협업</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="bg-base-200 rounded-lg p-5 mt-4">
+                                <p class="font-semibold mb-2">🚀 다음 단계</p>
+                                <p class="text-base">4부에서는 수집한 데이터로 <strong>AI 에이전트</strong>를 만들어봅니다!</p>
+                            </div>
+
+                            <div class="alert alert-info text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>💡 <strong>스크래핑 윤리:</strong> 웹 사이트의 robots.txt와 이용약관을 반드시 확인하세요.</span>
                             </div>
                         </div>
                     </div>
