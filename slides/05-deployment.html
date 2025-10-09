@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLI로 프로젝트 배포하기</title>
+    <script src="../assets/setup.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.1/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.9/dist/purify.min.js"></script>
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="theme-transition min-h-screen">
+    <!-- Home Button -->
+    <div class="fixed top-4 left-4 z-50">
+        <a href="../index.html" class="btn btn-ghost shadow">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            <span class="text-sm font-semibold">홈</span>
+        </a>
+    </div>
+
+    <!-- Theme Toggle -->
+    <div class="fixed top-4 right-4 z-50">
+        <div class="relative" id="themeMenuContainer">
+            <button id="themeToggleButton" class="btn btn-primary shadow" type="button" aria-haspopup="true" aria-expanded="false">
+                <span id="currentThemeLabel" class="text-sm font-semibold">🐝 Bumblebee</span>
+            </button>
+            <ul id="themeMenu" class="hidden absolute right-0 mt-2 z-[60] menu p-2 shadow bg-base-100 rounded-box w-52">
+                <li><button type="button" data-theme-option="bumblebee">🐝 Bumblebee</button></li>
+                <li><button type="button" data-theme-option="silk">🎨 Silk</button></li>
+                <li><button type="button" data-theme-option="black">⚫ Black</button></li>
+                <li><button type="button" data-theme-option="dark">🌙 Dark</button></li>
+                <li><button type="button" data-theme-option="light">☀️ Light</button></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Presentation Body -->
+    <div class="container mx-auto px-4 py-8 lg:py-12">
+        <!-- Header -->
+        <header class="text-center mb-6 pt-12 lg:pt-0">
+            <h1 class="text-5xl lg:text-6xl font-bold mb-3">CLI로 프로젝트 배포하기 🚀</h1>
+            <p class="text-2xl text-base-content/80">GitHub Pages와 Vercel로 세상에 공유하는 완결된 워크플로우</p>
+        </header>
+
+        <div class="lg:hidden mb-6">
+            <label class="form-control w-full">
+                <span class="label-text mb-2">슬라이드 선택</span>
+                <select class="select select-bordered" onchange="goToSlide(this.selectedIndex)">
+                    <option>주제 개요</option>
+                    <option>학습 목표</option>
+                    <option>Git 기본</option>
+                    <option>GitHub CLI 설치</option>
+                    <option>GitHub Pages 배포</option>
+                    <option>Vercel CLI 설치</option>
+                    <option>Vercel 배포</option>
+                    <option>도메인 연결</option>
+                    <option>Claude로 README</option>
+                    <option>포트폴리오 활용</option>
+                    <option>정리</option>
+                </select>
+            </label>
+        </div>
+
+            <div class="lg:grid lg:grid-cols-[260px_1fr] gap-8">
+                <aside class="hidden lg:block">
+                <div class="sticky top-24 space-y-4">
+                    <h3 class="text-lg font-semibold">콘텐츠 목차</h3>
+                    <ul class="menu menu-compact bg-base-100 rounded-box shadow-lg border border-base-200">
+                        <li><a href="#slide-1" id="sidebar-slide-0" class="flex items-center gap-3"><span class="badge badge-outline">01</span>주제 개요</a></li>
+                        <li><a href="#slide-2" id="sidebar-slide-1" class="flex items-center gap-3"><span class="badge badge-outline">02</span>학습 목표</a></li>
+                        <li><a href="#slide-3" id="sidebar-slide-2" class="flex items-center gap-3"><span class="badge badge-outline">03</span>Git 기본</a></li>
+                        <li><a href="#slide-4" id="sidebar-slide-3" class="flex items-center gap-3"><span class="badge badge-outline">04</span>GitHub CLI</a></li>
+                        <li><a href="#slide-5" id="sidebar-slide-4" class="flex items-center gap-3"><span class="badge badge-outline">05</span>GitHub Pages</a></li>
+                        <li><a href="#slide-6" id="sidebar-slide-5" class="flex items-center gap-3"><span class="badge badge-outline">06</span>Vercel CLI</a></li>
+                        <li><a href="#slide-7" id="sidebar-slide-6" class="flex items-center gap-3"><span class="badge badge-outline">07</span>Vercel 배포</a></li>
+                        <li><a href="#slide-8" id="sidebar-slide-7" class="flex items-center gap-3"><span class="badge badge-outline">08</span>도메인 연결</a></li>
+                        <li><a href="#slide-9" id="sidebar-slide-8" class="flex items-center gap-3"><span class="badge badge-outline">09</span>README 작성</a></li>
+                        <li><a href="#slide-10" id="sidebar-slide-9" class="flex items-center gap-3"><span class="badge badge-outline">10</span>포트폴리오</a></li>
+                        <li><a href="#slide-11" id="sidebar-slide-10" class="flex items-center gap-3"><span class="badge badge-outline">11</span>정리</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Slides Container -->
+            <main class="max-w-5xl mx-auto lg:mx-0">
+                <!-- Progress Bar -->
+                <div class="w-full bg-base-100 rounded-full h-2.5 mb-8">
+                    <div id="progressBar" class="bg-primary h-2.5 rounded-full transition-all duration-300" style="width: 9.09%"></div>
+                </div>
+                
+                <!-- Slide 1: 주제 개요 -->
+                <section id="slide-1" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-primary badge-lg">Intro</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">왜 배포가 중요한가? 🤔</h2>
+                            <div class="bg-base-200 rounded-lg p-5">
+                                <p class="text-xl italic mb-4">"만들기만 하고 공유하지 않으면<br>아무도 볼 수 없습니다."</p>
+                            </div>
+                            <p class="text-lg text-base-content/80">배포는 개발의 마지막 단계이자, <span class="font-semibold">가장 중요한 순간</span>입니다.</p>
+                            
+                            <div class="space-y-3">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-2xl">🌐</span>
+                                    <div>
+                                        <p class="font-semibold">인터넷에 공개</p>
+                                        <p class="text-sm text-base-content/70">누구나 URL로 접근 가능</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-2xl">📱</span>
+                                    <div>
+                                        <p class="font-semibold">포트폴리오 완성</p>
+                                        <p class="text-sm text-base-content/70">취업, 프로젝트 홍보에 활용</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-2xl">⚡</span>
+                                    <div>
+                                        <p class="font-semibold">빠른 피드백</p>
+                                        <p class="text-sm text-base-content/70">실제 사용자 반응 확인</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-info text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>💡 CLI로 배포하면 브라우저 없이 <strong>몇 초 만에 완료</strong>할 수 있습니다!</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 2: 학습 목표 -->
+                <section id="slide-2" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-secondary badge-lg">목표</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">학습 목표 🎯</h2>
+                            <ul class="space-y-3 text-lg leading-relaxed">
+                                <li>✅ Git 기본 명령어로 코드 버전 관리하기</li>
+                                <li>✅ GitHub CLI로 저장소 생성 및 관리</li>
+                                <li>✅ GitHub Pages로 정적 사이트 배포</li>
+                                <li>✅ Vercel CLI로 풀스택 앱 배포</li>
+                                <li>✅ Claude Code로 프로페셔널한 README 작성</li>
+                            </ul>
+
+                            <div class="divider"></div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-base-200 rounded-lg p-4">
+                                    <h3 class="font-semibold mb-2">🟢 GitHub Pages</h3>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• 정적 사이트 호스팅</li>
+                                        <li>• 무료 (.github.io 도메인)</li>
+                                        <li>• 2부 게임 배포에 적합</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-base-200 rounded-lg p-4">
+                                    <h3 class="font-semibold mb-2">🔷 Vercel</h3>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• Next.js, React 최적화</li>
+                                        <li>• 서버리스 함수 지원</li>
+                                        <li>• 자동 HTTPS, 빠른 CDN</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="bg-base-200 rounded-lg p-5 text-base">
+                                <p class="font-semibold mb-2">💡 이 강의를 마치면</p>
+                                <p>개발 → 배포 → 공유의 전체 워크플로우를 CLI만으로 완성할 수 있습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 3: Git 기본 -->
+                <section id="slide-3" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-accent badge-lg">기본</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">Git 기본 명령어 📦</h2>
+                            <p class="text-lg">배포 전 코드를 Git으로 관리해야 합니다.</p>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(1) 저장소 초기화</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 프로젝트 폴더에서 실행
+git init</code></pre>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2">현재 폴더를 Git 저장소로 만듭니다.</p>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(2) 파일 추가 및 커밋</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 모든 파일 추가
+git add .
+
+# 커밋 (변경사항 저장)
+git commit -m "첫 커밋: 게임 완성"</code></pre>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2"><code>git add .</code>는 모든 파일을, <code>git commit</code>은 변경사항을 저장합니다.</p>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(3) 상태 확인</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 현재 상태 확인
+git status
+
+# 커밋 히스토리 확인
+git log --oneline</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-base-200 rounded-lg p-5">
+                                <p class="font-semibold mb-2">💡 Tip</p>
+                                <p class="text-sm">의미 있는 작업 단위마다 커밋하는 습관을 들이세요. 나중에 되돌리기 쉬워집니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 4: GitHub CLI 설치 -->
+                <section id="slide-4" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-info badge-lg">도구</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">GitHub CLI 설치 및 인증 🔐</h2>
+                            <p class="text-lg">GitHub CLI(gh)는 브라우저 없이 GitHub를 제어합니다.</p>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">설치</h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                        <div>
+                                            <p class="font-semibold mb-2">macOS</p>
+                                            <div class="mockup-code text-sm">
+                                                <pre><code>brew install gh</code></pre>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold mb-2">Windows</p>
+                                            <div class="mockup-code text-sm">
+                                                <pre><code>winget install GitHub.cli</code></pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">인증</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># GitHub 로그인
+gh auth login</code></pre>
+                                    </div>
+                                    <ol class="list-decimal pl-6 space-y-1 text-sm mt-2">
+                                        <li>GitHub.com 선택</li>
+                                        <li>HTTPS 선택</li>
+                                        <li>Login with a web browser 선택</li>
+                                        <li>브라우저에서 인증 완료</li>
+                                    </ol>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">확인</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 인증 상태 확인
+gh auth status</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-success text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>인증은 한 번만 하면 됩니다!</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 5: GitHub Pages 배포 -->
+                <section id="slide-5" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-primary badge-lg">실습 1</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">GitHub Pages 배포 🌐</h2>
+                            <p class="text-lg">2부에서 만든 게임을 배포해봅시다.</p>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(1) 저장소 생성 및 푸시</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 공개 저장소 생성 및 현재 폴더 연결
+gh repo create my-game --public --source=. --remote=origin
+
+# 코드 푸시
+git add .
+git commit -m "게임 배포"
+git branch -M main
+git push -u origin main</code></pre>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(2) GitHub Pages 활성화</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># Pages 설정 (main 브랜치, 루트 디렉토리)
+gh repo edit --enable-pages --pages-branch main</code></pre>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2">약 1-2분 후 배포가 완료됩니다.</p>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(3) 사이트 열기</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 배포된 사이트 브라우저로 열기
+gh browse</code></pre>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2">URL 형식: <code>https://USERNAME.github.io/my-game</code></p>
+                                </div>
+                            </div>
+
+                            <div class="bg-base-200 rounded-lg p-5">
+                                <p class="font-semibold mb-2">🎉 완성!</p>
+                                <p class="text-sm">이제 이 URL을 친구들에게 공유할 수 있습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 6: Vercel CLI 설치 -->
+                <section id="slide-6" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-secondary badge-lg">도구</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">Vercel CLI 설치 🔷</h2>
+                            <p class="text-lg">Vercel은 Next.js와 React 앱 배포에 최적화되어 있습니다.</p>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(1) npm으로 설치</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 전역 설치
+npm install -g vercel</code></pre>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(2) 로그인</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># Vercel 계정으로 로그인
+vercel login</code></pre>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2">이메일로 인증 링크를 받아 로그인합니다.</p>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(3) 확인</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 버전 확인
+vercel --version</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-info text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>💡 Vercel 계정이 없다면 <a href="https://vercel.com" class="link" target="_blank">vercel.com</a>에서 무료로 생성하세요.</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 7: Vercel 배포 -->
+                <section id="slide-7" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-accent badge-lg">실습 2</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">Vercel로 배포하기 ⚡</h2>
+                            <p class="text-lg">4부의 AI 앱이나 React 프로젝트를 배포해봅시다.</p>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(1) 첫 배포</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 프로젝트 폴더에서 실행
+vercel</code></pre>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2">몇 가지 질문에 답하면 자동으로 배포됩니다.</p>
+                                    <ol class="list-decimal pl-6 space-y-1 text-sm mt-2">
+                                        <li>Set up and deploy? → Y</li>
+                                        <li>Which scope? → 본인 계정 선택</li>
+                                        <li>Link to existing project? → N</li>
+                                        <li>Project name? → Enter (기본값)</li>
+                                        <li>Directory? → Enter (현재 폴더)</li>
+                                    </ol>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(2) 프로덕션 배포</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 실제 서비스용 배포
+vercel --prod</code></pre>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2">프로덕션 URL이 생성됩니다 (예: <code>my-app.vercel.app</code>).</p>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">(3) 사이트 열기</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># 배포된 사이트 열기
+vercel open</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-base-200 rounded-lg p-5">
+                                <p class="font-semibold mb-2">⚡ 자동 빌드</p>
+                                <p class="text-sm">Vercel은 Git 푸시만 해도 자동으로 재배포됩니다!</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 8: 도메인 연결 -->
+                <section id="slide-8" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-warning badge-lg">고급</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">커스텀 도메인 연결 🌍</h2>
+                            <p class="text-lg">본인의 도메인을 연결할 수 있습니다 (선택사항).</p>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">GitHub Pages</h3>
+                                    <div class="mockup-code text-sm">
+                                        <pre><code># 1. CNAME 파일 생성
+echo "mydomain.com" > CNAME
+git add CNAME
+git commit -m "Add custom domain"
+git push
+
+# 2. 도메인 DNS 설정 (도메인 업체 사이트)
+# A 레코드: 185.199.108.153 (GitHub IP)
+# CNAME 레코드: USERNAME.github.io</code></pre>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Vercel</h3>
+                                    <div class="mockup-code text-sm">
+                                        <pre><code># CLI로 도메인 추가
+vercel domains add mydomain.com
+
+# Vercel이 제공하는 DNS 설정값을 도메인 업체에 입력</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-info text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>💡 도메인은 가비아, Cloudflare 등에서 연 1-2만원에 구매할 수 있습니다.</span>
+                            </div>
+
+                            <div class="bg-base-200 rounded-lg p-5">
+                                <p class="font-semibold mb-2">🔒 자동 HTTPS</p>
+                                <p class="text-sm">GitHub Pages와 Vercel 모두 HTTPS를 자동으로 설정해줍니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 9: Claude로 README 작성 -->
+                <section id="slide-9" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-success badge-lg">AI 협업</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">Claude로 README 작성 📝</h2>
+                            <p class="text-lg">프로페셔널한 README로 프로젝트를 소개하세요.</p>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Claude Code에게 요청하기</h3>
+                                    <div class="bg-base-200 rounded-lg p-4">
+                                        <p class="text-base italic">"이 프로젝트의 README.md를 작성해줘. 다음 내용을 포함해줘:</p>
+                                        <ul class="text-sm mt-2 space-y-1 pl-4">
+                                            <li>• 프로젝트 제목과 간단한 설명</li>
+                                            <li>• 주요 기능 목록</li>
+                                            <li>• 설치 및 실행 방법</li>
+                                            <li>• 사용한 기술 스택</li>
+                                            <li>• 배포 URL</li>
+                                            <li>• 스크린샷 섹션</li>
+                                            <li>• 라이선스"</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">좋은 README 예시</h3>
+                                    <div class="mockup-code text-xs">
+                                        <pre><code># 🎮 My Awesome Game
+
+간단한 브라우저 게임입니다. Claude Code와 함께 만들었습니다.
+
+## ✨ Features
+- 직관적인 UI
+- 반응형 디자인
+- 점수 시스템
+
+## 🚀 Demo
+**[Play Now](https://username.github.io/my-game)**
+
+## 🛠️ Tech Stack
+- HTML5 / CSS3
+- JavaScript (Vanilla)
+- Tailwind CSS
+
+## 📦 Installation
+\`\`\`bash
+git clone https://github.com/username/my-game.git
+cd my-game
+# index.html을 브라우저로 열기
+\`\`\`
+
+## 📄 License
+MIT</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-success text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>좋은 README는 GitHub 스타를 받는 첫걸음입니다! ⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 10: 포트폴리오 활용 -->
+                <section id="slide-10" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-primary badge-lg">활용</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">포트폴리오로 활용하기 💼</h2>
+                            <p class="text-lg">배포한 프로젝트를 포트폴리오에 추가하세요.</p>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-base-200 rounded-lg p-4">
+                                    <h3 class="text-xl font-semibold mb-3">📋 이력서</h3>
+                                    <ul class="text-sm space-y-2">
+                                        <li><strong>프로젝트명:</strong> My Game</li>
+                                        <li><strong>기술:</strong> HTML, CSS, JS</li>
+                                        <li><strong>URL:</strong> <a href="#" class="link">username.github.io/my-game</a></li>
+                                        <li><strong>설명:</strong> Claude Code와 협업한 인터랙티브 게임</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-base-200 rounded-lg p-4">
+                                    <h3 class="text-xl font-semibold mb-3">💼 LinkedIn</h3>
+                                    <ul class="text-sm space-y-2">
+                                        <li>• Projects 섹션에 추가</li>
+                                        <li>• URL과 설명 포함</li>
+                                        <li>• 스킬 태그 연결</li>
+                                        <li>• 스크린샷 첨부</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-base-200 rounded-lg p-4">
+                                    <h3 class="text-xl font-semibold mb-3">🎨 GitHub Profile</h3>
+                                    <ul class="text-sm space-y-2">
+                                        <li>• README에 프로젝트 소개</li>
+                                        <li>• Pin된 저장소로 고정</li>
+                                        <li>• Topics 태그 추가</li>
+                                        <li>• 배지(Badge) 추가</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-base-200 rounded-lg p-4">
+                                    <h3 class="text-xl font-semibold mb-3">📱 SNS 공유</h3>
+                                    <ul class="text-sm space-y-2">
+                                        <li>• 트위터/X에 공유</li>
+                                        <li>• 개발 커뮤니티 게시</li>
+                                        <li>• 블로그 포스팅</li>
+                                        <li>• #buildinpublic 해시태그</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-info text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>💡 <strong>작은 프로젝트라도</strong> 배포하고 공유하면 큰 차별화 요소가 됩니다!</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 11: 정리 -->
+                <section id="slide-11" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-accent badge-lg">정리</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">정리 🎯</h2>
+                            
+                            <div class="bg-primary text-primary-content rounded-lg p-6 text-center space-y-3">
+                                <p class="text-2xl font-bold">"배포는 개발의 완성"</p>
+                                <p class="text-lg">Git + GitHub CLI + Vercel = 완벽한 워크플로우</p>
+                            </div>
+
+                            <div class="divider"></div>
+
+                            <h3 class="text-2xl font-semibold mb-3">📚 배운 내용 요약</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-base-200 rounded-lg p-4">
+                                    <h4 class="font-semibold mb-2">🔧 도구</h4>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• Git: 버전 관리</li>
+                                        <li>• GitHub CLI: 저장소 관리</li>
+                                        <li>• Vercel CLI: 배포 자동화</li>
+                                        <li>• Claude Code: README 작성</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bg-base-200 rounded-lg p-4">
+                                    <h4 class="font-semibold mb-2">🚀 배포 플랫폼</h4>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• GitHub Pages: 정적 사이트</li>
+                                        <li>• Vercel: Next.js/React</li>
+                                        <li>• 무료 + 자동 HTTPS</li>
+                                        <li>• 커스텀 도메인 가능</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="bg-base-200 rounded-lg p-5 mt-4">
+                                <p class="font-semibold mb-2">🎓 전체 학습 여정 완료!</p>
+                                <ol class="text-sm space-y-1">
+                                    <li>1부: Claude Code 활용하기</li>
+                                    <li>2부: 게임 만들기</li>
+                                    <li>3부: 웹 스크래핑</li>
+                                    <li>4부: AI 에이전트</li>
+                                    <li>5부: 프로젝트 배포 ← 🎉 완료!</li>
+                                </ol>
+                            </div>
+
+                            <div class="alert alert-success">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-5 w-5" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>이제 <strong>아이디어 → 개발 → 배포 → 공유</strong>의 전체 사이클을 혼자서 완성할 수 있습니다! 🚀</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="../assets/chat-loader.js"></script>
+    <script src="../assets/app.js"></script>
+</body>
+</html>
+
