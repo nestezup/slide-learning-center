@@ -37,8 +37,8 @@
         <!-- Filter & Search Section -->
         <div class="mb-8 space-y-4">
             <!-- Search Bar -->
-            <div class="form-control">
-                <div class="input-group">
+            <div class="form-control w-full">
+                <div class="input-group flex w-full gap-2">
                     <input type="text" id="searchInput" placeholder="강의 검색..." class="input input-bordered flex-1" onkeyup="filterCourses()">
                     <button class="btn btn-square">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -49,7 +49,7 @@
             </div>
 
             <!-- Category Filters -->
-            <div class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-2 justify-center">
                 <button class="btn btn-sm btn-primary" data-category="all" onclick="filterByCategory('all')">전체</button>
                 <button class="btn btn-sm btn-outline btn-primary" data-category="cli" onclick="filterByCategory('cli')">CLI</button>
                 <button class="btn btn-sm btn-outline btn-secondary" data-category="ai" onclick="filterByCategory('ai')">AI 협업</button>
