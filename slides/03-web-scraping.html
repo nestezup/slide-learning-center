@@ -42,7 +42,7 @@
     <div class="container mx-auto px-4 py-8 lg:py-12">
         <!-- Header -->
         <header class="text-center mb-6 pt-12 lg:pt-0">
-            <h1 class="text-5xl lg:text-6xl font-bold mb-3">CLI로 웹 스크래핑하기 🌐</h1>
+            <h1 class="text-5xl lg:text-6xl font-bold mb-3">3부: CLI로 웹 스크래핑하기 🌐</h1>
             <p class="text-2xl text-base-content/80">curl과 pup으로 웹 데이터를 자유자재로 수집하기</p>
         </header>
 
@@ -58,7 +58,8 @@
                     <option>AI타임즈 실습</option>
                     <option>빅카인즈 JSON</option>
                     <option>추가 연습 주제</option>
-                    <option>Claude 협업</option>
+                    <option>Chrome DevTools MCP</option>
+                    <option>MCP 활용 예시</option>
                     <option>정리</option>
                 </select>
             </label>
@@ -77,8 +78,9 @@
                         <li><a href="#slide-6" id="sidebar-slide-5" class="flex items-center gap-3"><span class="badge badge-outline">06</span>AI타임즈 실습</a></li>
                         <li><a href="#slide-7" id="sidebar-slide-6" class="flex items-center gap-3"><span class="badge badge-outline">07</span>빅카인즈 JSON</a></li>
                         <li><a href="#slide-8" id="sidebar-slide-7" class="flex items-center gap-3"><span class="badge badge-outline">08</span>추가 연습 주제</a></li>
-                        <li><a href="#slide-9" id="sidebar-slide-8" class="flex items-center gap-3"><span class="badge badge-outline">09</span>Claude 협업</a></li>
-                        <li><a href="#slide-10" id="sidebar-slide-9" class="flex items-center gap-3"><span class="badge badge-outline">10</span>정리</a></li>
+                        <li><a href="#slide-9" id="sidebar-slide-8" class="flex items-center gap-3"><span class="badge badge-outline">09</span>Chrome DevTools</a></li>
+                        <li><a href="#slide-10" id="sidebar-slide-9" class="flex items-center gap-3"><span class="badge badge-outline">10</span>MCP 활용</a></li>
+                        <li><a href="#slide-11" id="sidebar-slide-10" class="flex items-center gap-3"><span class="badge badge-outline">11</span>정리</a></li>
                     </ul>
                 </div>
             </aside>
@@ -87,7 +89,7 @@
             <main class="max-w-5xl mx-auto lg:mx-0">
                 <!-- Progress Bar -->
                 <div class="w-full bg-base-100 rounded-full h-2.5 mb-8">
-                    <div id="progressBar" class="bg-primary h-2.5 rounded-full transition-all duration-300" style="width: 10%"></div>
+                    <div id="progressBar" class="bg-primary h-2.5 rounded-full transition-all duration-300" style="width: 9.09%"></div>
                 </div>
                 <!-- Slide 1: 주제 개요 -->
                 <section id="slide-1" class="slide active animate-fade-in">
@@ -96,7 +98,7 @@
                             <div class="badge badge-primary badge-lg">Intro</div>
                             <h2 class="card-title text-4xl lg:text-5xl">웹 스크래핑이란? 🕷️</h2>
                             <div class="bg-base-200 rounded-lg p-5">
-                                <p class="text-xl italic mb-4">"웹 페이지에서 필요한 데이터만<br>자동으로 추출하는 기술"</p>
+                                <p class="text-xl italic mb-4">"웹 페이지에서 필요한 데이터만 자동으로 추출하는 기술"</p>
                             </div>
                             <p class="text-lg text-base-content/80">브라우저를 열지 않고도 <span class="font-semibold">CLI 명령어로 웹 데이터를 가져오고 가공</span>할 수 있습니다.</p>
                             <div class="space-y-3">
@@ -472,49 +474,119 @@ cat bigkinds_result.json | jq '.resultList[].TITLE' > bigkinds_titles.txt</code>
                     </div>
                 </section>
 
-                <!-- Slide 9: Claude Code 협업 -->
+                <!-- Slide 9: Chrome DevTools MCP 소개 -->
                 <section id="slide-9" class="slide active animate-fade-in">
                     <div class="card bg-base-100 shadow-xl">
                         <div class="card-body space-y-5">
-                            <div class="badge badge-success badge-lg">AI 협업</div>
-                            <h2 class="card-title text-4xl lg:text-5xl">Claude Code와 협업하기 🤖</h2>
-                            <p class="text-lg">수집한 데이터를 Claude Code로 분석하고 요약할 수 있습니다.</p>
+                            <div class="badge badge-success badge-lg">고급</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">Chrome DevTools MCP 🌐</h2>
+                            <p class="text-lg">Claude Code에서 Chrome 브라우저를 직접 제어하여 고급 스크래핑을 할 수 있습니다.</p>
 
                             <div class="space-y-4">
+                                <div class="bg-base-200 rounded-lg p-4 mt-4">
+                                    <p class="text-sm font-semibold mb-2">📚 DevTools MCP 공식 문서</p>
+                                    <a href="https://github.com/ChromeDevTools/chrome-devtools-mcp" target="_blank" class="link link-secondary text-sm">
+                                        https://github.com/ChromeDevTools/chrome-devtools-mcp
+                                    </a>
+                                </div>
                                 <div>
-                                    <h3 class="text-xl font-semibold mb-2">예시 1: 데이터 요약</h3>
-                                    <div class="bg-base-200 rounded-lg p-4">
-                                        <p class="text-base italic">"aitimes_titles.txt 파일에 있는 클로드 관련 기사 제목들을 분석해서, 최근 클로드 기술 트렌드를 3줄로 요약해줘."</p>
+                                    <h3 class="text-xl font-semibold mb-2">MCP란?</h3>
+                                    <p class="text-base">Model Context Protocol - AI가 외부 도구를 사용할 수 있게 하는 표준 프로토콜입니다.</p>
+                                </div>
+                                
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">설치 방법</h3>
+                                    <div class="mockup-code">
+                                        <pre><code># Claude Code CLI로 추가
+claude mcp add chrome-devtools npx chrome-devtools-mcp@latest</code></pre>
                                     </div>
+                                    <p class="text-sm text-base-content/70 mt-2">한 번만 설정하면 Claude Code가 브라우저를 자동으로 제어할 수 있습니다.</p>
                                 </div>
 
                                 <div>
-                                    <h3 class="text-xl font-semibold mb-2">예시 2: 자동 스크래핑 요청</h3>
-                                    <div class="bg-base-200 rounded-lg p-4">
-                                        <p class="text-base italic">"네이버 블로그에서 'AI 개발' 검색어로 최신 5개 블로그 제목을 가져와서 파일로 저장해줘."</p>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <h3 class="text-xl font-semibold mb-2">예시 3: 데이터 정제</h3>
-                                    <div class="bg-base-200 rounded-lg p-4">
-                                        <p class="text-base italic">"bigkinds_titles.txt에서 '클로드'가 포함된 제목만 필터링해서 claude_only.txt로 저장해줘."</p>
+                                    <h3 class="text-xl font-semibold mb-2">주요 기능</h3>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div class="bg-base-200 rounded-lg p-3">
+                                            <p class="font-semibold text-sm">🖱️ 입력 자동화</p>
+                                            <p class="text-xs text-base-content/70">클릭, 입력, 드래그 등</p>
+                                        </div>
+                                        <div class="bg-base-200 rounded-lg p-3">
+                                            <p class="font-semibold text-sm">🔄 네비게이션</p>
+                                            <p class="text-xs text-base-content/70">페이지 이동, 새 탭 열기</p>
+                                        </div>
+                                        <div class="bg-base-200 rounded-lg p-3">
+                                            <p class="font-semibold text-sm">📸 스크린샷</p>
+                                            <p class="text-xs text-base-content/70">화면 캡처, 스냅샷</p>
+                                        </div>
+                                        <div class="bg-base-200 rounded-lg p-3">
+                                            <p class="font-semibold text-sm">🌐 네트워크</p>
+                                            <p class="text-xs text-base-content/70">요청/응답 분석</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="alert alert-success">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-5 w-5" fill="none" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <div class="alert alert-info text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                <span><strong>데이터 수집(CLI)</strong> + <strong>분석(AI)</strong> = 강력한 자동화 워크플로우!</span>
+                                <span>💡 동적 웹페이지(JavaScript로 렌더링)도 스크래핑 가능합니다!</span>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 10: MCP 활용 예시 -->
+                <section id="slide-10" class="slide active animate-fade-in">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body space-y-5">
+                            <div class="badge badge-primary badge-lg">실습</div>
+                            <h2 class="card-title text-4xl lg:text-5xl">Claude Code로 브라우저 제어 🤖</h2>
+                            <p class="text-lg">자연어로 브라우저를 조작하여 복잡한 스크래핑도 간단하게!</p>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">예시 1: 성능 분석</h3>
+                                    <div class="bg-base-200 rounded-lg p-4">
+                                        <p class="text-base italic">"https://developers.chrome.com의 성능을 측정해줘"</p>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2">→ Claude가 페이지를 열고 성능 트레이스를 자동으로 분석합니다.</p>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">예시 2: 로그인 후 데이터 수집</h3>
+                                    <div class="bg-base-200 rounded-lg p-4">
+                                        <p class="text-base italic">"네이버에 로그인해서 내 블로그 통계를 가져와줘"</p>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2">→ 로그인이 필요한 페이지도 자동화할 수 있습니다.</p>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">예시 3: 동적 콘텐츠 스크래핑</h3>
+                                    <div class="bg-base-200 rounded-lg p-4">
+                                        <p class="text-base italic">"인스타그램에서 #AI 해시태그의 최신 게시물 10개를 스크린샷으로 저장해줘"</p>
+                                    </div>
+                                    <p class="text-sm text-base-content/70 mt-2">→ 무한 스크롤, 동적 로딩 등 복잡한 페이지도 처리 가능합니다.</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-base-200 rounded-lg p-5">
+                                <p class="font-semibold mb-2">⚡ 장점</p>
+                                <ul class="text-sm space-y-1">
+                                    <li>• curl/pup보다 훨씬 강력 (JavaScript 실행, 로그인 등)</li>
+                                    <li>• 자연어로 명령하면 Claude가 알아서 처리</li>
+                                    <li>• 스크린샷, 네트워크 로그 등 다양한 데이터 수집</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- Slide 10: 정리 -->
-                <section id="slide-10" class="slide active animate-fade-in">
+                <!-- Slide 11: 정리 -->
+                <section id="slide-11" class="slide active animate-fade-in">
                     <div class="card bg-base-100 shadow-xl">
                         <div class="card-body space-y-5">
                             <div class="badge badge-accent badge-lg">정리</div>
@@ -545,7 +617,7 @@ cat bigkinds_result.json | jq '.resultList[].TITLE' > bigkinds_titles.txt</code>
                                         <li>• AI타임즈 HTML 스크래핑</li>
                                         <li>• 빅카인즈 JSON API 호출</li>
                                         <li>• 다양한 응용 주제 확인</li>
-                                        <li>• Claude Code와 협업</li>
+                                        <li>• Chrome DevTools MCP 활용</li>
                                     </ul>
                                 </div>
                             </div>
