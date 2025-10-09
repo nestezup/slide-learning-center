@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 // Chat modal functions
 function toggleChat() {
     const modal = document.getElementById('chatModal');

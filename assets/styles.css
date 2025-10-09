@@ -294,6 +294,65 @@ pre code {
     filter: none !important;
     opacity: 1 !important;
 }
+
+/* Collapsible sidebar styles */
+.sidebar-toggle {
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    transform: translateX(2px);
+}
+
+.sidebar-toggle.collapsed {
+    transform: rotate(-90deg);
+}
+
+.sidebar-content {
+    transition: all 0.3s ease;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.sidebar-content.collapsed {
+    max-height: 0;
+    opacity: 0;
+    margin-bottom: 0;
+}
+
+.sidebar-content.expanded {
+    max-height: 1000px;
+    opacity: 1;
+}
+
+/* Sidebar container collapse */
+.sidebar-container {
+    transition: all 0.3s ease;
+}
+
+.sidebar-container.collapsed {
+    width: 60px;
+    min-width: 60px;
+}
+
+.sidebar-container.collapsed .sidebar-content {
+    display: none;
+}
+
+.sidebar-container.collapsed .sticky {
+    padding: 0;
+}
+
+.sidebar-container.collapsed h3 {
+    display: none;
+}
+
+.sidebar-container.collapsed .sidebar-toggle {
+    margin: 0 auto;
+    display: block;
+}
 /* Chat slide-in animation */
 @keyframes slideInUp {
     from {

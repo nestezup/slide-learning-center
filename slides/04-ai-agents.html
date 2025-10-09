@@ -51,6 +51,10 @@
                         <span class="label-text mb-2">슬라이드 선택</span>
                         <select class="select select-bordered" onchange="goToSlide(this.selectedIndex)">
                             <option>소개</option>
+                            <option>Subagents란?</option>
+                                <option>서브에이전트 생성하기</option>
+                            <option>사용 방식</option>
+                            <option>고급 활용</option>
                             <option>여행 플래너</option>
                             <option>독서 도우미</option>
                             <option>콘텐츠 기획자</option>
@@ -59,7 +63,7 @@
                             <option>만드는 법</option>
                             <option>실전 예제</option>
                             <option>활용 팁</option>
-                            <option>다음 단계</option>
+
                         </select>
                     </label>
                 </div>
@@ -70,15 +74,18 @@
                             <h3 class="text-lg font-semibold">콘텐츠 목차</h3>
                             <ul class="menu menu-compact bg-base-100 rounded-box shadow-lg border border-base-200">
                                 <li><a href="#slide-1" id="sidebar-slide-0" class="flex items-center gap-3"><span class="badge badge-outline">01</span>소개</a></li>
-                                <li><a href="#slide-2" id="sidebar-slide-1" class="flex items-center gap-3"><span class="badge badge-outline">02</span>여행 플래너</a></li>
-                                <li><a href="#slide-3" id="sidebar-slide-2" class="flex items-center gap-3"><span class="badge badge-outline">03</span>독서 도우미</a></li>
-                                <li><a href="#slide-4" id="sidebar-slide-3" class="flex items-center gap-3"><span class="badge badge-outline">04</span>콘텐츠 기획자</a></li>
-                                <li><a href="#slide-5" id="sidebar-slide-4" class="flex items-center gap-3"><span class="badge badge-outline">05</span>식단 코치</a></li>
-                                <li><a href="#slide-6" id="sidebar-slide-5" class="flex items-center gap-3"><span class="badge badge-outline">06</span>용어 해설가</a></li>
-                                <li><a href="#slide-7" id="sidebar-slide-6" class="flex items-center gap-3"><span class="badge badge-outline">07</span>만드는 법</a></li>
-                                <li><a href="#slide-8" id="sidebar-slide-7" class="flex items-center gap-3"><span class="badge badge-outline">08</span>실전 예제</a></li>
-                                <li><a href="#slide-9" id="sidebar-slide-8" class="flex items-center gap-3"><span class="badge badge-outline">09</span>활용 팁</a></li>
-                                <li><a href="#slide-10" id="sidebar-slide-9" class="flex items-center gap-3"><span class="badge badge-outline">10</span>다음 단계</a></li>
+                                <li><a href="#slide-2" id="sidebar-slide-1" class="flex items-center gap-3"><span class="badge badge-outline">02</span>Subagents란?</a></li>
+                                <li><a href="#slide-3" id="sidebar-slide-2" class="flex items-center gap-3"><span class="badge badge-outline">03</span>서브에이전트 생성하기</a></li>
+                                <li><a href="#slide-4" id="sidebar-slide-3" class="flex items-center gap-3"><span class="badge badge-outline">04</span>사용 방식</a></li>
+                                <li><a href="#slide-5" id="sidebar-slide-4" class="flex items-center gap-3"><span class="badge badge-outline">05</span>고급 활용</a></li>
+                                <li><a href="#slide-6" id="sidebar-slide-5" class="flex items-center gap-3"><span class="badge badge-outline">06</span>여행 플래너</a></li>
+                                <li><a href="#slide-7" id="sidebar-slide-6" class="flex items-center gap-3"><span class="badge badge-outline">07</span>독서 도우미</a></li>
+                                <li><a href="#slide-8" id="sidebar-slide-7" class="flex items-center gap-3"><span class="badge badge-outline">08</span>콘텐츠 기획자</a></li>
+                                <li><a href="#slide-9" id="sidebar-slide-8" class="flex items-center gap-3"><span class="badge badge-outline">09</span>식단 코치</a></li>
+                                <li><a href="#slide-10" id="sidebar-slide-9" class="flex items-center gap-3"><span class="badge badge-outline">10</span>용어 해설가</a></li>
+                                <li><a href="#slide-11" id="sidebar-slide-10" class="flex items-center gap-3"><span class="badge badge-outline">11</span>만드는 법</a></li>
+                                <li><a href="#slide-12" id="sidebar-slide-11" class="flex items-center gap-3"><span class="badge badge-outline">12</span>실전 예제</a></li>
+                                <li><a href="#slide-13" id="sidebar-slide-12" class="flex items-center gap-3"><span class="badge badge-outline">13</span>활용 팁</a></li>
                             </ul>
                         </div>
                     </aside>
@@ -128,6 +135,348 @@
             <section id="slide-2" class="slide hidden">
                 <div class="card bg-base-100 shadow-xl">
                     <div class="card-body space-y-5">
+                        <div class="badge badge-info badge-lg">개념 설명</div>
+                        <h2 class="card-title text-4xl lg:text-5xl">Subagents란 무엇인가?</h2>
+                        <p class="text-lg text-base-content/80">Claude Code의 강력한 Subagents 기능 이해하기</p>
+
+                        <div class="grid md:grid-cols-2 gap-6 mt-8">
+                            <div class="card bg-base-200 shadow-lg">
+                                <div class="card-body">
+                                    <h3 class="card-title text-xl">🎯 정의와 개념</h3>
+                                    <ul class="list-disc list-inside space-y-1">
+                                        <li>특정 역할이나 전문성을 가진 보조 AI 에이전트</li>
+                                        <li>메인 대화 흐름과 별개의 컨텍스트 창을 가짐</li>
+                                        <li>고유한 시스템 프롬프트, 도구 세트, 모델 구성 가능</li>
+                                        <li>Claude Code가 자동 또는 명시적으로 호출 가능</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="card bg-base-200 shadow-lg">
+                                <div class="card-body">
+                                    <h3 class="card-title text-xl">⭐ 주요 이점</h3>
+                                    <ul class="list-disc list-inside space-y-1">
+                                        <li><strong>컨텍스트 보존</strong>: 독립된 작업 공간으로 메인 대화 복잡성 감소</li>
+                                        <li><strong>전문성 강화</strong>: 역할별 특화된 지침과 도구로 성공률 향상</li>
+                                        <li><strong>재사용성</strong>: 한 번 정의하면 여러 프로젝트에서 공유 가능</li>
+                                        <li><strong>권한 제어</strong>: 필요한 도구만 허용하여 보안 및 책임 분리</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card bg-primary text-primary-content shadow-lg mt-8">
+                            <div class="card-body">
+                                <h3 class="card-title text-xl">🔧 동작 방식</h3>
+                                <div class="grid md:grid-cols-3 gap-4 mt-4">
+                                    <div class="text-center">
+                                        <div class="text-3xl mb-2">📋</div>
+                                        <p class="font-semibold">정의</p>
+                                        <p class="text-sm">Markdown 파일로 역할과 기능 명시</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-3xl mb-2">🎯</div>
+                                        <p class="font-semibold">호출</p>
+                                        <p class="text-sm">자동 위임 또는 명시적 호출</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-3xl mb-2">⚡</div>
+                                        <p class="font-semibold">실행</p>
+                                        <p class="text-sm">독립된 컨텍스트에서 전문 작업 수행</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="slide-3" class="slide hidden">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body space-y-5">
+                        <div class="badge badge-info badge-lg">설정 가이드</div>
+                        <h2 class="card-title text-4xl lg:text-5xl">첫 번째 서브에이전트 생성하기</h2>
+                        <p class="text-lg text-base-content/80">단계별 가이드로 나만의 AI 서브에이전트 만들기</p>
+
+                        <div class="space-y-6 mt-8">
+                            <div class="card bg-base-200 shadow-lg">
+                                <div class="card-body">
+                                    <h3 class="card-title text-xl">1️⃣ 서브에이전트 인터페이스 열기</h3>
+                                    <p class="mb-4">다음 명령을 실행하세요:</p>
+                                    <div class="bg-base-100 p-4 rounded-lg">
+                                        <code class="text-sm font-mono">/agents</code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card bg-base-200 shadow-lg">
+                                <div class="card-body">
+                                    <h3 class="card-title text-xl">2️⃣ 'Create New Agent' 선택</h3>
+                                    <ul class="list-disc list-inside space-y-2">
+                                        <li>프로젝트 수준 또는 사용자 수준 서브에이전트를 생성할지 선택하세요</li>
+                                        <li>프로젝트 수준: 해당 프로젝트에서만 사용</li>
+                                        <li>사용자 수준: 모든 프로젝트에서 공통으로 사용</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="card bg-base-200 shadow-lg">
+                                <div class="card-body">
+                                    <h3 class="card-title text-xl">3️⃣ 서브에이전트 정의</h3>
+                                    <div class="space-y-3">
+                                        <div>
+                                            <h4 class="font-semibold">권장사항:</h4>
+                                            <p>먼저 Claude로 생성한 다음 맞춤화하여 자신만의 것으로 만드세요</p>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold">상세 설명:</h4>
+                                            <p>서브에이전트를 자세히 설명하고 언제 사용해야 하는지 명시하세요</p>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold">도구 선택:</h4>
+                                            <p>접근 권한을 부여할 도구를 선택하세요 (또는 모든 도구를 상속받으려면 비워두세요)</p>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold">편집 팁:</h4>
+                                            <p>Claude로 생성하는 경우 e를 눌러 자체 편집기에서 시스템 프롬프트를 편집할 수도 있습니다</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card bg-primary text-primary-content shadow-lg">
+                                <div class="card-body">
+                                    <h3 class="card-title text-xl">4️⃣ 저장 및 사용</h3>
+                                    <p class="mb-4">이제 서브에이전트를 사용할 수 있습니다! Claude는 적절할 때 자동으로 사용하거나 명시적으로 호출할 수 있습니다:</p>
+                                    <div class="bg-base-100 text-base-content p-4 rounded-lg">
+                                        <code class="text-sm font-mono">> code-reviewer 서브에이전트를 사용하여 최근 변경사항을 확인해주세요</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="slide-4" class="slide hidden">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body space-y-5">
+                        <div class="badge badge-info badge-lg">사용법</div>
+                        <h2 class="card-title text-4xl lg:text-5xl">사용 방식 및 예시 Subagent</h2>
+                        <p class="text-lg text-base-content/80">실제 사용 방법과 실용적인 예제들</p>
+
+                        <div class="space-y-6 mt-8">
+                            <div class="card bg-base-200 shadow-lg">
+                                <div class="card-body">
+                                    <h3 class="card-title text-xl">🚀 Subagent 호출 방식</h3>
+                                    <div class="grid md:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-semibold mb-3 text-primary">자동 위임 (Automatic Delegation)</h4>
+                                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                                <li>Claude Code가 요청 문맥과 description 기반으로 자동 선택</li>
+                                                <li>"use proactively" 또는 "MUST BE USED" 표현으로 적극 위임 유도</li>
+                                                <li>예: "코드 리뷰해줘" → code-reviewer 자동 호출</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold mb-3 text-secondary">명시적 호출 (Explicit Invocation)</h4>
+                                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                                <li>사용자가 직접 subagent 이름을 요청문에 명시</li>
+                                                <li>예: "Use the code-reviewer subagent to check my changes"</li>
+                                                <li>정확한 제어가 필요할 때 사용</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card bg-base-200 shadow-lg">
+                                <div class="card-body">
+                                    <h3 class="card-title text-xl">📋 예시 Subagent들</h3>
+                                    <div class="space-y-4">
+                                        <div class="collapse collapse-arrow">
+                                            <input type="radio" name="subagent-examples" />
+                                            <div class="collapse-title text-lg font-medium">1. code-reviewer</div>
+                                            <div class="collapse-content">
+                                                <p><strong>역할</strong>: 코드 품질, 보안, 유지보수성 중심 리뷰</p>
+                                                <p><strong>도구</strong>: Read, Grep, Glob, Bash</p>
+                                                <p><strong>모델</strong>: inherit</p>
+                                                <p><strong>작동 예</strong>: git diff 분석, 우선순위 기준 피드백 제공</p>
+                                            </div>
+                                        </div>
+                                        <div class="collapse collapse-arrow">
+                                            <input type="radio" name="subagent-examples" />
+                                            <div class="collapse-title text-lg font-medium">2. debugger</div>
+                                            <div class="collapse-content">
+                                                <p><strong>역할</strong>: 오류, 테스트 실패, 비정상 동작 진단</p>
+                                                <p><strong>도구</strong>: Read, Edit, Bash, Grep, Glob</p>
+                                                <p><strong>절차</strong>: 에러 메시지 → 재현 단계 → 원인 분석 → 최소 수정 → 검증</p>
+                                            </div>
+                                        </div>
+                                        <div class="collapse collapse-arrow">
+                                            <input type="radio" name="subagent-examples" />
+                                            <div class="collapse-title text-lg font-medium">3. data-scientist</div>
+                                            <div class="collapse-content">
+                                                <p><strong>역할</strong>: 데이터 분석, SQL 쿼리 작성, BigQuery 활용</p>
+                                                <p><strong>도구</strong>: Bash, Read, Write</p>
+                                                <p><strong>모델</strong>: sonnet</p>
+                                                <p><strong>행동 흐름</strong>: 요구사항 이해 → 쿼리 작성 → 분석 → 요약 보고</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card bg-primary text-primary-content shadow-lg">
+                                <div class="card-body">
+                                    <h3 class="card-title text-xl">💡 활용 팁 및 권고사항</h3>
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <h4 class="font-semibold mb-2">설계 원칙</h4>
+                                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                                <li>Claude로 직접 생성하고 커스터마이즈</li>
+                                                <li>단일 책임 방식으로 역할 설계</li>
+                                                <li>구체적 지침, 제약, 예시 포함</li>
+                                                <li>도구 접근은 최소한으로 제한</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold mb-2">관리 방법</h4>
+                                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                                <li>프로젝트 subagent는 버전 관리에 포함</li>
+                                                <li>팀원들과의 공유 및 협업</li>
+                                                <li>정기적인 성능 평가 및 개선</li>
+                                                <li>문서화와 테스트 유지</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="slide-5" class="slide hidden">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body space-y-5">
+                        <div class="badge badge-info badge-lg">고급 기법</div>
+                        <h2 class="card-title text-4xl lg:text-5xl">고급 활용 및 성능 고려사항</h2>
+                        <p class="text-lg text-base-content/80">복잡한 작업을 위한 고급 기법과 최적화 전략</p>
+
+                        <div class="space-y-6 mt-8">
+                            <div class="card bg-base-200 shadow-lg">
+                                <div class="card-body">
+                                    <h3 class="card-title text-xl">🔗 서브에이전트 체이닝 (Chaining)</h3>
+                                    <p class="mb-4">복합 작업 시 여러 subagent를 순차적으로 호출하여 전문성의 시너지 효과 창출</p>
+                                    <div class="bg-base-100 p-4 rounded-lg">
+                                        <h4 class="font-semibold mb-2">예시: 코드 개선 워크플로우</h4>
+                                        <div class="flex items-center justify-between">
+                                            <div class="text-center">
+                                                <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold mb-2">1</div>
+                                                <p class="text-sm font-semibold">코드 분석</p>
+                                                <p class="text-xs">code-reviewer</p>
+                                            </div>
+                                            <div class="text-2xl">→</div>
+                                            <div class="text-center">
+                                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-white font-bold mb-2">2</div>
+                                                <p class="text-sm font-semibold">최적화</p>
+                                                <p class="text-xs">optimizer</p>
+                                            </div>
+                                            <div class="text-2xl">→</div>
+                                            <div class="text-center">
+                                                <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white font-bold mb-2">3</div>
+                                                <p class="text-sm font-semibold">문서화</p>
+                                                <p class="text-xs">documenter</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card bg-base-200 shadow-lg">
+                                <div class="card-body">
+                                    <h3 class="card-title text-xl">🎯 동적 Subagent 선택</h3>
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <h4 class="font-semibold mb-2">자동 판단 메커니즘</h4>
+                                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                                <li>Claude Code가 문맥 기반으로 적합한 subagent 판단</li>
+                                                <li>description 필드의 구체성과 행동 지향성 중요</li>
+                                                <li>요청의 복잡도와 전문 분야 매칭</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold mb-2">선택 최적화 팁</h4>
+                                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                                <li>description에 키워드 포함 (예: "security", "performance")</li>
+                                                <li>사용 시나리오를 구체적으로 명시</li>
+                                                <li>호출 조건을 명확하게 정의</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card bg-base-200 shadow-lg">
+                                <div class="card-body">
+                                    <h3 class="card-title text-xl">⚡ 성능 및 비용 고려사항</h3>
+                                    <div class="grid md:grid-cols-2 gap-6">
+                                        <div>
+                                            <h4 class="font-semibold mb-3 text-green-600">긍정적 요소</h4>
+                                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                                <li><strong>컨텍스트 효율성</strong>: 메인 대화 깔끔하게 유지</li>
+                                                <li><strong>전문성 집중</strong>: 특정 분야의 성공률 향상</li>
+                                                <li><strong>재사용성</strong>: 반복 작업의 일관성 향상</li>
+                                                <li><strong>유지보수성</strong>: 모듈화된 관리 용이</li>
+                                            </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-3 text-orange-600">주의사항</h4>
+                                    <ul class="list-disc list-inside space-y-1 text-sm">
+                                        <li><strong>지연 시간</strong>: 호출마다 초기 설정 및 문맥 로드 필요</li>
+                                        <li><strong>비용 증가</strong>: 여러 모델 호출로 인한 비용 상승</li>
+                                        <li><strong>복잡성</strong>: 과도한 subagent 생성으로 관리 부하</li>
+                                        <li><strong>의존성</strong>: subagent 간 의존성 관리 필요</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card bg-primary text-primary-content shadow-lg">
+                                <div class="card-body">
+                                    <h3 class="card-title text-xl">📚 최종 정리 및 참고자료</h3>
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <h4 class="font-semibold mb-2">핵심 원칙</h4>
+                                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                                <li>단일 책임 원칙 + 최소 권한 원칙 준수</li>
+                                                <li>문서화, 버전 관리, 팀 공유 중요</li>
+                                                <li>필요한 경우에만 생성, 과도한 분산 방지</li>
+                                                <li>지속적인 성능 평가 및 개선</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold mb-2">관련 문서</h4>
+                                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                                <li>Slash commands 문서</li>
+                                                <li>Hooks 설정 가이드</li>
+                                                <li>MCP 도구 문서</li>
+                                                <li>Claude Code Best Practices</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="slide-6" class="slide hidden">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body space-y-5">
                         <div class="badge badge-secondary badge-lg">실전 예제 1</div>
                         <h2 class="card-title text-4xl lg:text-5xl">나만의 여행 플래너 ✈️</h2>
                         <p class="text-lg text-base-content/80">개인의 취향과 조건에 맞춰 완벽한 여행 계획을 세워주는 전문가</p>
@@ -175,7 +524,7 @@
                 </div>
             </section>
 
-            <section id="slide-3" class="slide hidden">
+            <section id="slide-7" class="slide hidden">
                 <div class="card bg-base-100 shadow-xl">
                     <div class="card-body space-y-5">
                         <div class="badge badge-secondary badge-lg">실전 예제 2</div>
@@ -223,7 +572,7 @@
                 </div>
             </section>
 
-            <section id="slide-4" class="slide hidden">
+            <section id="slide-8" class="slide hidden">
                 <div class="card bg-base-100 shadow-xl">
                     <div class="card-body space-y-5">
                         <div class="badge badge-secondary badge-lg">실전 예제 3</div>
@@ -271,7 +620,7 @@
                 </div>
             </section>
 
-            <section id="slide-5" class="slide hidden">
+            <section id="slide-9" class="slide hidden">
                 <div class="card bg-base-100 shadow-xl">
                     <div class="card-body space-y-5">
                         <div class="badge badge-secondary badge-lg">실전 예제 4</div>
@@ -319,7 +668,7 @@
                 </div>
             </section>
 
-            <section id="slide-6" class="slide hidden">
+            <section id="slide-10" class="slide hidden">
                 <div class="card bg-base-100 shadow-xl">
                     <div class="card-body space-y-5">
                         <div class="badge badge-secondary badge-lg">실전 예제 5</div>
@@ -367,7 +716,7 @@
                 </div>
             </section>
 
-            <section id="slide-7" class="slide hidden">
+            <section id="slide-11" class="slide hidden">
                 <div class="card bg-base-100 shadow-xl">
                     <div class="card-body space-y-5">
                         <div class="badge badge-accent badge-lg">제작 가이드</div>
@@ -432,7 +781,7 @@
                 </div>
             </section>
 
-            <section id="slide-8" class="slide hidden">
+            <section id="slide-12" class="slide hidden">
                 <div class="card bg-base-100 shadow-xl">
                     <div class="card-body space-y-5">
                         <div class="badge badge-info badge-lg">실습</div>
@@ -512,7 +861,7 @@
                 </div>
             </section>
 
-            <section id="slide-9" class="slide hidden">
+            <section id="slide-13" class="slide hidden">
                 <div class="card bg-base-100 shadow-xl">
                     <div class="card-body space-y-5">
                         <div class="badge badge-warning badge-lg">팁 & 주의사항</div>
@@ -575,290 +924,14 @@
                 </div>
             </section>
 
-            <section id="slide-10" class="slide hidden">
-                <div class="card bg-base-100 shadow-xl">
-                    <div class="card-body space-y-5">
-                        <div class="badge badge-success badge-lg">마무리</div>
-                        <h2 class="card-title text-4xl lg:text-5xl">다음 단계</h2>
-                        <p class="text-lg text-base-content/80">AI 서브에이전트 마스터를 위한 추가 학습 경로</p>
 
-                        <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
-                            <div class="card bg-base-200 shadow-lg">
-                                <div class="card-body">
-                                    <h3 class="card-title text-xl">📚 심화 학습</h3>
-                                    <ul class="list-disc list-inside space-y-2">
-                                        <li><strong>고급 프롬프트 엔지니어링</strong>: Few-shot learning, Chain-of-Thought</li>
-                                        <li><strong>AI 에이전트 체인</strong>: 여러 에이전트의 연동 및 협업</li>
-                                        <li><strong>API 연동</strong>: 외부 서비스와의 연동 방법</li>
-                                        <li><strong>자동화 시스템</strong>: AI를 활용한 워크플로우 자동화</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="card bg-base-200 shadow-lg">
-                                <div class="card-body">
-                                    <h3 class="card-title text-xl">🛠️ 실전 프로젝트</h3>
-                                    <ul class="list-disc list-inside space-y-2">
-                                        <li><strong>개인 비서 에이전트</strong>: 일정 관리, 이메일 정리</li>
-                                        <li><strong>콘텐츠 크리에이터</strong>: 블로그, SNS 포스팅 자동화</li>
-                                        <li><strong>데이터 분석가</strong>: 보고서 생성, 인사이트 도출</li>
-                                        <li><strong>언어 학습 튜터</strong>: 맞춤형 언어 학습 시스템</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card bg-primary text-primary-content shadow-lg mt-8">
-                            <div class="card-body">
-                                <h3 class="card-title text-xl">🎯 추천 자료</h3>
-                                <div class="space-y-2">
-                                    <p>• <strong>OpenAI Prompt Engineering Guide</strong>: 공식 프롬프트 엔지니어링 가이드</p>
-                                    <p>• <strong>AI Agent Patterns</strong>: 에이전트 설계 패턴 모음</p>
-                                    <p>• <strong>Practical AI Applications</strong>: 실용적인 AI 활용 사례</p>
-                                    <p>• <strong>Claude Documentation</strong>: Claude의 고급 기능 활용법</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="alert alert-success mt-8">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 h-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            <span>이제 당신만의 AI 서브에이전트를 만들어 일과 삶의 질을 높여보세요! 시작이 반이입니다.</span>
-                        </div>
-
-                        <div class="text-center mt-8">
-                            <div class="text-6xl mb-4">🎉</div>
-                            <p class="text-xl font-semibold">수고하셨습니다! AI 서브에이전트 마스터의 첫걸음을 내디뎠습니다.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
                     </main>
                 </div>
             </div>
 
-            <!-- Navigation -->
-            <div class="fixed bottom-0 left-0 right-0 bg-base-100 border-t border-base-300 z-40">
-                <div class="container mx-auto px-4 py-3">
-                    <div class="flex justify-between items-center">
-                        <button id="prevBtn" class="btn btn-primary btn-sm" onclick="changeSlide(-1)" disabled>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                            </svg>
-                            이전
-                        </button>
-
-                        <div class="flex items-center gap-4">
-                            <span id="slideInfo" class="text-sm text-base-content/60">1 / 10</span>
-                            <div class="flex gap-1">
-                                <button class="w-2 h-2 rounded-full bg-primary transition-all" onclick="goToSlide(0)" id="nav-dot-0"></button>
-                                <button class="w-2 h-2 rounded-full bg-base-300 transition-all" onclick="goToSlide(1)" id="nav-dot-1"></button>
-                                <button class="w-2 h-2 rounded-full bg-base-300 transition-all" onclick="goToSlide(2)" id="nav-dot-2"></button>
-                                <button class="w-2 h-2 rounded-full bg-base-300 transition-all" onclick="goToSlide(3)" id="nav-dot-3"></button>
-                                <button class="w-2 h-2 rounded-full bg-base-300 transition-all" onclick="goToSlide(4)" id="nav-dot-4"></button>
-                                <button class="w-2 h-2 rounded-full bg-base-300 transition-all" onclick="goToSlide(5)" id="nav-dot-5"></button>
-                                <button class="w-2 h-2 rounded-full bg-base-300 transition-all" onclick="goToSlide(6)" id="nav-dot-6"></button>
-                                <button class="w-2 h-2 rounded-full bg-base-300 transition-all" onclick="goToSlide(7)" id="nav-dot-7"></button>
-                                <button class="w-2 h-2 rounded-full bg-base-300 transition-all" onclick="goToSlide(8)" id="nav-dot-8"></button>
-                                <button class="w-2 h-2 rounded-full bg-base-300 transition-all" onclick="goToSlide(9)" id="nav-dot-9"></button>
-                            </div>
-                        </div>
-
-                        <button id="nextBtn" class="btn btn-primary btn-sm" onclick="changeSlide(1)">
-                            다음
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-    <script>
-        // Presentation functionality
-        let currentSlide = 0;
-        const totalSlides = 10;
-        let isTransitioning = false;
-
-        // Theme management
-        const themeKey = 'theme';
-        const defaultTheme = 'bumblebee';
-
-        function setTheme(theme) {
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem(themeKey, theme);
-            updateThemeLabel(theme);
-        }
-
-        function updateThemeLabel(theme) {
-            const labels = {
-                'bumblebee': '🐝 Bumblebee',
-                'silk': '🎨 Silk',
-                'black': '⚫ Black',
-                'dark': '🌙 Dark',
-                'light': '☀️ Light'
-            };
-            document.getElementById('currentThemeLabel').textContent = labels[theme] || labels[defaultTheme];
-        }
-
-        // Initialize theme
-        const savedTheme = localStorage.getItem(themeKey) || defaultTheme;
-        setTheme(savedTheme);
-
-        // Theme toggle button
-        document.getElementById('themeToggleButton').addEventListener('click', function() {
-            const menu = document.getElementById('themeMenu');
-            menu.classList.toggle('hidden');
-        });
-
-        // Theme selection
-        document.querySelectorAll('[data-theme-option]').forEach(button => {
-            button.addEventListener('click', function() {
-                const theme = this.getAttribute('data-theme-option');
-                setTheme(theme);
-                document.getElementById('themeMenu').classList.add('hidden');
-            });
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const container = document.getElementById('themeMenuContainer');
-            if (!container.contains(event.target)) {
-                document.getElementById('themeMenu').classList.add('hidden');
-            }
-        });
-
-        // Slide navigation functions
-        function goToSlide(index) {
-            if (isTransitioning) return;
-            if (index < 0 || index >= totalSlides) return;
-
-            isTransitioning = true;
-
-            // Hide current slide
-            const currentSlideEl = document.getElementById(`slide-${currentSlide + 1}`);
-            currentSlideEl.classList.remove('active', 'animate-fade-in');
-            currentSlideEl.classList.add('animate-fade-out');
-
-            // Update sidebar
-            const currentSidebar = document.getElementById(`sidebar-slide-${currentSlide}`);
-            if (currentSidebar) {
-                currentSidebar.classList.remove('bg-primary', 'text-primary-content');
-            }
-
-            setTimeout(() => {
-                // Show new slide
-                currentSlide = index;
-                const newSlideEl = document.getElementById(`slide-${currentSlide + 1}`);
-                newSlideEl.classList.remove('hidden', 'animate-fade-out');
-                newSlideEl.classList.add('active', 'animate-fade-in');
-
-                // Update sidebar
-                const newSidebar = document.getElementById(`sidebar-slide-${currentSlide}`);
-                if (newSidebar) {
-                    newSidebar.classList.add('bg-primary', 'text-primary-content');
-                }
-
-                // Update UI
-                updateNavigation();
-                updateProgressBar();
-                updateSlideInfo();
-                updateMobileSelect();
-                updateNavDots();
-
-                // Scroll to top
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-
-                isTransitioning = false;
-            }, 300);
-        }
-
-        function changeSlide(direction) {
-            goToSlide(currentSlide + direction);
-        }
-
-        function updateNavigation() {
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-
-            prevBtn.disabled = currentSlide === 0;
-            nextBtn.disabled = currentSlide === totalSlides - 1;
-        }
-
-        function updateProgressBar() {
-            const progress = ((currentSlide + 1) / totalSlides) * 100;
-            document.getElementById('progressBar').style.width = `${progress}%`;
-        }
-
-        function updateSlideInfo() {
-            document.getElementById('slideInfo').textContent = `${currentSlide + 1} / ${totalSlides}`;
-        }
-
-        function updateMobileSelect() {
-            const select = document.querySelector('.select.select-bordered');
-            if (select) {
-                select.selectedIndex = currentSlide;
-            }
-        }
-
-        function updateNavDots() {
-            for (let i = 0; i < totalSlides; i++) {
-                const dot = document.getElementById(`nav-dot-${i}`);
-                if (i === currentSlide) {
-                    dot.classList.remove('bg-base-300');
-                    dot.classList.add('bg-primary');
-                } else {
-                    dot.classList.remove('bg-primary');
-                    dot.classList.add('bg-base-300');
-                }
-            }
-        }
-
-        // Sidebar navigation
-        document.querySelectorAll('aside a[href^="#slide-"]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const slideId = this.getAttribute('href').substring(7); // Remove '#slide-'
-                goToSlide(parseInt(slideId) - 1);
-            });
-        });
-
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowLeft') {
-                changeSlide(-1);
-            } else if (e.key === 'ArrowRight') {
-                changeSlide(1);
-            }
-        });
-
-        // Touch/swipe support
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        document.addEventListener('touchstart', function(e) {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        document.addEventListener('touchend', function(e) {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-
-        function handleSwipe() {
-            if (touchEndX < touchStartX - 50) {
-                changeSlide(1); // Swipe left, next slide
-            }
-            if (touchEndX > touchStartX + 50) {
-                changeSlide(-1); // Swipe right, previous slide
-            }
-        }
-
-        // Initialize
-        updateNavigation();
-        updateProgressBar();
-        updateSlideInfo();
-        updateNavDots();
-    </script>
+  
+    <script src="../assets/chat-loader.js"></script>
+    <script src="../assets/app.js"></script>
 </body>
 </html>
